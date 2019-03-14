@@ -1,0 +1,12 @@
+<?php $title = 'Welcome'; ?>
+<?php ob_start(); ?>
+
+
+<body>
+<h2> Bienvenue dans votre espace</h2>
+
+</body>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.phtml'); ?>

@@ -1,0 +1,48 @@
+h1
+{
+    text-align:center;
+    color:blue;
+    font-size:0.9em;
+}
+
+body
+{
+	background-color: #D3DEDC;
+};
+
+h2 {
+    
+    color: darkgreen;
+    border: solid black;
+    border-bottom-color: azure;
+}
+p {
+ font-style: italic;
+
+}
+
+#navigation li
+{
+ display:inline;
+margin: 15px;
+    list-style: none;
+}
+
+#navigation 
+{
+list-style: none ;
+margin: 0px ;
+padding: 0px ;
+list-style: none ;
+text-align: center ;
+    
+}
+
+#homeTitle 
+{
+    font-size: 30px;
+    color: white;
+    position: relative;
+    align-content: center;
+    
+}
