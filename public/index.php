@@ -1,34 +1,49 @@
 <?php
+/*require 'class/Autoload.php';
+Autoloader::Register();*/
 require('../controller/controller.php');
-    
+$controller = new BlogController();
     
 if (isset($_GET['action'])) 
 {
      if ($_GET['action'] == 'home'||$_GET['action'] == '') 
     {
-        require('../view/home.php');
+        $controller->home();
     }
     elseif ($_GET['action'] == 'articleList') 
     {
-       require('../view/articleList.phtml');
+       $controller->articleList();
     }
     elseif($_GET['action'] == 'article') 
     {
-        require('../view/article.phtml');
+        $controller->article();
+    }
+    elseif($_GET['action'] == 'addComment') 
+    {
+        $controller->addComment();
     }
     elseif ($_GET['action'] == 'aboutUs'||$_GET['action'] == '') 
     {
-        require('../view/aboutUs.phtml');
+        $controller->aboutUs();
     }
     elseif ($_GET['action'] == 'contact'||$_GET['action'] == '') 
     {
-        require('../view/contact.phtml');
+        $controller->contact();
     }
      elseif ($_GET['action'] == 'login'||$_GET['action'] == '') 
     {
-        require('../view/userConnexion.phtml');
+        $controller->login();
+    }
+    elseif ($_GET['action'] == 'viewComment'||$_GET['action'] == '') 
+    {
+        $controller->viewComment();
     }
 else {
     echo'Pas d\'autres pages disponibles pour le moment';
     }
 }
+else {
+    $controller->home();    
+    }
+
+

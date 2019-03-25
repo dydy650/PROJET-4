@@ -1,10 +1,14 @@
 
-<?php $title = 'A propos'; ?>
+
+<?php 
+require_once('../model/model.php'); 
+require_once('../controller/controller.php'); 
+$title = 'A propos'; ?>
 <?php ob_start(); ?>
 
-    
-    <body>
-<h1>Chapitre 1 : Lorem Ipsum</h1>
+
+<body>
+    <h1>Chapitre 1 : Lorem Ipsum</h1>
 
 <h2> "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..." </h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis, augue a tincidunt ultrices, urna elit semper nulla, eu commodo urna urna ac purus. Sed posuere dolor quis nunc tempor, eu tempus tellus vulputate. Ut scelerisque hendrerit magna ut laoreet. Aenean imperdiet mauris massa, ac consequat ligula scelerisque porta. Praesent vel ipsum molestie, hendrerit nibh vel, placerat diam. Vivamus pellentesque ac nisl ut maximus. In pulvinar tellus sem, finibus facilisis felis hendrerit at. Quisque sagittis venenatis arcu vel porttitor. Pellentesque id risus sit amet mauris venenatis molestie et id dui. Nulla pharetra sed mauris ut euismod. Nullam vestibulum mi ut metus pharetra facilisis. Aliquam tempor erat at ipsum ultricies, in ultrices tortor vestibulum. Morbi in venenatis dui. Ut sed interdum ipsum, id accumsan nunc. Aenean eu vulputate ex.<br>
@@ -17,10 +21,40 @@ Nunc consequat, neque ut ultricies malesuada, purus orci dapibus nunc, non commo
 
 Praesent faucibus tincidunt neque quis placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras urna nulla, dapibus a nisi euismod, interdum congue purus. Etiam et felis pretium, ullamcorper nisl a, porta nunc. Phasellus eu arcu at urna vestibulum tincidunt. Donec tincidunt, velit eleifend faucibus tristique, elit purus suscipit erat, ac fermentum risus ipsum sagittis erat. Quisque pulvinar in nulla ac sodales. Curabitur gravida pharetra elementum. Sed dignissim, eros non consequat pretium, nunc ex malesuada dui, eget dignissim dolor ligula sit amet tortor. Mauris eget orci metus. Fusce id ligula sed sem lacinia lobortis et semper mauris. Mauris pharetra odio ac mollis ultrices. Cras cursus velit sed nulla vehicula, sit amet egestas nibh molestie. Donec augue lorem, mollis ac arcu et, aliquet accumsan metus. Suspendisse ornare sodales neque, eu euismod ipsum ultricies quis.</p>
         
-         <em><a href="http://localhost/PHP/P4/public/index.php?action=viewComment">Voir les commentaires</a></em><br>
-         <em><a href="http://localhost/PHP/P4/public/index.php?action=addComment">Ajouter un commentaire</a></em>
-     
-  </body>
+    <h2>commentaires </h2>
+    
+        <?php
+            foreach($comments as $comment)
+            {
+                //echo '<p>' . $comment["author"] . le . $comment["comment_date"] .'</p>';
+        ?>
+            <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
+            <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+               
+        <?php
+        }
+        ?>   
+  
+
+        
+    <h2>Donnez moi votre point de vue </h2>
+    <form action="index.php?action=article.phtml" method="post">
+        <div>
+            <label for="auteur">Auteur</label><br />
+            <input type="text" id="author" name="author" />
+        </div>
+        <div>
+            <label for="commentaire">Commentaire</label><br />
+            <textarea id="comment" name="comment"></textarea>
+        </div>
+        <div>
+            <input type="submit" />
+        </div>
+    </form>
+
+</body>
+
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.phtml'); ?>
