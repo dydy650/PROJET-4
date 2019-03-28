@@ -1,7 +1,11 @@
 <?php
-/*require 'class/Autoload.php';
-Autoloader::Register();*/
-require('../controller/controller.php');
+
+require('../class/autoload.php');
+use \App\Autoloader;
+use \App\controller\BlogController;
+
+Autoloader::Register();
+
 $controller = new BlogController();
     
 if (isset($_GET['action'])) 
@@ -46,4 +50,10 @@ else {
     $controller->home();    
     }
 
-
+function vd($data)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    die;
+}

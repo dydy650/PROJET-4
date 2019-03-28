@@ -1,6 +1,7 @@
 <?php
-// Chargement des classes RAJOUT 
-require_once('../model/model.php');
+namespace App\controller; 
+
+use \App\model\Model;
 
 class BlogController
 {

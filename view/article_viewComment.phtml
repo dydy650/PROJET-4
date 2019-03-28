@@ -1,8 +1,7 @@
 
 
 <?php 
-require_once('../model/model.php'); 
-require_once('../controller/controller.php'); 
+ 
 $title = 'A propos'; ?>
 <?php ob_start(); ?>
 
@@ -35,22 +34,8 @@ Praesent faucibus tincidunt neque quis placerat. Class aptent taciti sociosqu ad
         }
         ?>   
   
-
         
-    <h2>Donnez moi votre point de vue </h2>
-    <form action="index.php?action=article.phtml" method="post">
-        <div>
-            <label for="auteur">Auteur</label><br />
-            <input type="text" id="author" name="author" />
-        </div>
-        <div>
-            <label for="commentaire">Commentaire</label><br />
-            <textarea id="comment" name="comment"></textarea>
-        </div>
-        <div>
-            <input type="submit" />
-        </div>
-    </form>
+<em><a href="http://localhost/PHP/P4/public/index.php?action=addComment">Ajouter un commentaire</a></em>
 
 </body>
 

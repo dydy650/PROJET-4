@@ -1,13 +1,13 @@
 <?php
-require_once('DBManager.php'); 
+namespace App\model;
+
 class Model extends DBManager
 {  
     
     public function test()
     {
-        $db = $this->dbConnect();
         
-        $datas = $db->query('SELECT * FROM test ');    
+        $datas = $this->db->query('SELECT * FROM comments ');    
         $comments = array();
         while ($row = $datas->fetch()) 
         {
