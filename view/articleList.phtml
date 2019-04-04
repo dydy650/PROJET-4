@@ -1,26 +1,30 @@
 
-<?php $title = 'Chapitres'; ?>
+<?php $title = 'Article'; ?>
 <?php ob_start(); ?>
 
 
-    <body>
-<p>Presentation des differents chapitres / premieres lignes</p>
+<body>
 
-<h2> Billet 1 </h2>
-        <p> </p>
-        <a href="http://localhost/PHP/P4/public/index.php?action=article"> Découvrir le nouveau chapitre </a>
-<h2> Billet 2 </h2>
-        <a href="URL"> Lire </a>
-<h2> Billet 3 </h2>
-        <a href="URL"> Lire </a>
-<h2> Billet 4 </h2>
-        <a href="URL"> Lire </a>
-<h2> Billet 5 </h2>
-        <a href="URL"> Lire </a>
-<h2> Billet 6 </h2>
-        <a href="URL"> Lire </a>
+<?php
+foreach ($billets as $billet)
+{
+    ?>
+    <div class="news">
+        <h3>
+            <?= htmlspecialchars($billet['title']) ?>
+            <em>le <?= $billet['billet_date_fr'] ?></em>
+        </h3>
 
-    </body>
+        <p>
+            <em><a href="index.php?action=article&id=<?= $billet['id'] ?>">Lire le chapitre</a></em>
+        </p>
+    </div>
+    <?php
+}
+?>
+
+
+</body>
 
 <?php $content = ob_get_clean(); ?>
 

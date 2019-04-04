@@ -2,6 +2,9 @@
 namespace App\controller; 
 
 use \App\model\Model;
+use \App\model\BilletManager;
+use \App\model\CommentManager;
+use Exception;
 
 class BlogController
 {
@@ -10,24 +13,6 @@ class BlogController
         require('../view/home.php');
     
 	}
-    
-     public function articleList()
-	{
-        require('../view/articleList.phtml');
-    
-	}
-    
-     public function article()
-	{
-        require('../view/article.phtml');
-    
-	}
-     public function addComment()
-	{
-        require('../view/article_addComment.phtml');
-    
-	}
-    
      public function aboutUs()
 	{
         require('../view/aboutUs.phtml');
@@ -45,15 +30,44 @@ class BlogController
         require('../view/userConnexion.phtml');
     
 	}
-    
-    public function viewComment()
+     
+      public function listBillets()
     {
-        
-        $model = new Model();
-        $comments = $model->test(); 
-        require('../view/article_viewComment.phtml');
+        $billetManager = new \App\model\BilletManager();
+        $billets = $billetManager->getBillets(); 
+        require('../view/articleList.phtml');
     }
-  
+    
+    public function billet()
+    {
+        $billetManager = new \App\model\BilletManager();
+        $commentManager = new \App\model\CommentManager();
+        
+        $billet = $billetManager->getBillet($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id']);
+        require('../view/article_postView.phtml');
+    }
+
+    /**
+     * @param $billet_id
+     * @param $author
+     * @param $comment
+     * @throws Exception
+     */
+    public function addComment($billet_id, $author, $comment)
+      {
+            $commentManager = new \App\model\CommentManager();
+
+            $affectedLines = $commentManager->postComments($billet_id, $author, $comment);
+
+         if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+            }
+        else {
+            header('Location: index.php?action=article&id=' . $billet_id);
+            }
+        }
+
 }
 
   

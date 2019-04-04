@@ -1,26 +1,31 @@
 
-<?php $title = 'A propos'; ?>
+<?php $title = 'Article'; ?>
 <?php ob_start(); ?>
 
-    
     <body>
+
+<?php
+foreach ($billets as $billet){
+?>
+    <div class="news">
+        <h3>
+            <?= htmlspecialchars($billet['title']) ?>
+            <em>le <?= $billet['billet_date_fr'] ?></em>
+        </h3>
         
-        <div class="billet">
-    <h3>
-        <?= htmlspecialchars($post['title']) ?>
-        <em>le <?= $post['creation_date_fr'] ?></em>
-    </h3>
-    
-    <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
-    </p>
-</div>
-        
-        
-         <em><a href="http://localhost/PHP/P4/public/index.php?action=viewComment">Voir les commentaires</a></em><br>
-         <em><a href="http://localhost/PHP/P4/public/index.php?action=addComment">Ajouter un commentaire</a></em>
+        <p>
+            <?= nl2br(htmlspecialchars($billet['content'])) ?>
+            <br />
+            <em><a href="index.php?action=article&id=<?= $billet['id'] ?>">Commentaires</a></em>
+        </p>
+    </div>
+<?php
+}
+
+?>
      
   </body>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.phtml'); ?>

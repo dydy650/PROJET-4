@@ -1,61 +1,33 @@
 <?php
+namespace App\model;
 
-<?php
-require_once('DBManager.php'); 
-class Model extends DBManager
+//require_once('DBManager.php'); 
+class BilletManager extends DBManager
 {  
-    
+    //connexion a la BDD --> fonction de recupération des donnees
     public function getBillets()
     {
-        $db = $this->dbConnect();
         
-        $datas = $db->query('SELECT * FROM billets ');    
-        $posts = array();
-        while ($row = $datas->fetch()) 
+        $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y à %Hh%imin%ss\') AS billet_date_fr FROM billets ORDER BY billet_date DESC LIMIT 0, 5');
+         $billets = array();
+            while ($row = $datas->fetch()) 
         {
-            $posts[] = $row; 
-        
+            $billets[] = $row;
         }
-        return $posts;
+        $datas->closeCursor();
+        return $billets;
     }
 
 
-    public function getBillet($postID)
+    public function getBillet($id)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, billet_date FROM billets  WHERE id = ?');
-        $req->execute(array($postID));
-        $post = $req->fetch();
+    
+        $req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y à %Hh%imin%ss\') AS billet_date_fr FROM billets WHERE id = ?');
+        $req->execute(array($id));
+        $billet = $req->fetch();
 
-        return $post;
+        return $billet;
     }
 }
 
 
-/*<?php
-
-namespace OpenClassrooms\Blog\Model;
-
-require_once("model/Manager.php");
-
-class PostManager extends Manager
-{
-    public function getPosts()
-    {
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
-
-        return $req;
-    }
-
-    public function getPost($postId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch();
-
-        return $post;
-    }
-}
-*/

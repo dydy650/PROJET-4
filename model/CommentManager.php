@@ -1,27 +1,28 @@
 <?php
-require_once('DBManager.php'); 
-class Model extends DBManager
-{  
-    
-    public function getComments()
+
+namespace App\model;
+ 
+//require_once('DBManager.php'); 
+class CommentManager extends DBManager
+{
+
+    /**
+     * @param $billet_id
+     * @return array
+     */
+    public function getComments($billet_id)
     {
-        $db = $this->dbConnect();
         
-        $datas = $db->prepare('SELECT * FROM comments ');    
-        $comments = array();
-        while ($row = $datas->fetch()) 
-        {
-            $comments[] = $row; 
-        
-        }
+        $comments= $this->db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE billet_id = ? ORDER BY comment_date DESC');
+        $comments->execute(array($billet_id));
         return $comments;
     }
+
     
-    public function postComments($author, $comment)
+    public function postComments($billet_id, $author, $comment)
     {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO test(author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($author, $comment));
+        $comments = $this->db->prepare('INSERT INTO comments(billet_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+        $affectedLines = $comments->execute(array($billet_id, $author, $comment));
 
         return $affectedLines;
     }
@@ -29,30 +30,3 @@ class Model extends DBManager
    
 
 
-/*<?php
-
-namespace OpenClassrooms\Blog\Model;
-
-require_once("model/Manager.php");
-
-class CommentManager extends Manager
-{
-    public function getComments($postId)
-    {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
-
-        return $comments;
-    }
-
-    public function postComment($postId, $author, $comment)
-    {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author, $comment));
-
-        return $affectedLines;
-    }
-}
-*/
