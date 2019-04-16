@@ -5,18 +5,18 @@
     <body>
 
 <?php
-foreach ($billets as $billet){
+foreach ($this->billets as $billet){
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($billet['title']) ?>
-            <em>le <?= $billet['billet_date_fr'] ?></em>
+            <?= htmlspecialchars($billet->getTitle()) ?>
+            <em>le <?= $billet->getBilletDate() ?></em>
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($billet['content'])) ?>
+            <?= nl2br(htmlspecialchars($billet->getContent())) ?>
             <br />
-            <em><a href="index.php?action=article&id=<?= $billet['id'] ?>">Commentaires</a></em>
+            <em><a href="index.php?action=article&id=<?= $billet->getId() ?>">Commentaires</a></em>
         </p>
     </div>
 <?php

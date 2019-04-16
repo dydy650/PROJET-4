@@ -32,7 +32,11 @@ if (isset($_GET['action']))
     {
         $controller->contact();
     }
-     elseif ($_GET['action'] == 'login'||$_GET['action'] == '') 
+     elseif ($_GET['action'] == 'contact_confirmation'||$_GET['action'] == '')
+     {
+         $controller->contactConfirmation();
+     }
+     elseif ($_GET['action'] == 'login'||$_GET['action'] == '')
     {
         $controller->login();
     }
@@ -52,13 +56,28 @@ if (isset($_GET['action']))
          }
      }
 
+     // --> a reécrire !
+     elseif ($_GET['action'] == 'adminHome')
+        if (isset($_POST['user']) && $_POST['password']) {
+            $controller->NewConnexion($user, $password);
+            $admins = $Newconnexion->connexion($_POST['pseudo'], $_POST['mdp']);
+            if ($admins == 1)
+            { //si ligne ==1 alors l'utilisateur a rentré un bon identifiant et mot de passe
+                $controller->adminHome();
+            }
+        }
+        else {
+            $controller->login();
+        }
+}
+
 else {
     echo'Pas d\'autres pages disponibles pour le moment';
     }
-}
-else {
+
+/*else {
     $controller->home();    
-    }
+    }*/
 
 
 function vd($data)

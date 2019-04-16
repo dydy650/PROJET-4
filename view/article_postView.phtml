@@ -4,7 +4,8 @@
 
 <body>
 
-<?php $title = htmlspecialchars($billet['title']); ?>
+<?php $title = htmlspecialchars($this->billet->getTitle()); ?>
+
 
 <?php ob_start(); ?>
 
@@ -12,18 +13,19 @@
 
 <div class="news">
     <h3>
-        <?= htmlspecialchars($billet['title']) ?>
-        <em>le <?= $billet['billet_date_fr'] ?></em>
+        <?= htmlspecialchars($this->billet->getTitle()) ?>
+        <em>le <?= $this->billet->getBilletDate() ?></em>
     </h3>
-    
+
     <p>
-        <?= nl2br(htmlspecialchars($billet['content'])) ?>
+        <?= nl2br(htmlspecialchars($this->billet->getContent())) ?>
     </p>
 </div>
 
+
 <h2>Commentaires</h2>
 
-<form action="index.php?action=addComment&amp;id=<?= $billet['id'] ?>" method="post">
+<form action="index.php?action=addComment&amp;id=<?= $this->billet->getId() ?>" method="post">
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
@@ -33,23 +35,25 @@
         <textarea id="comment" name="comment"></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input type="submit" value="Envoyer" />
     </div>
 
 </form>
 
+
 <?php
-foreach ($comments as $comment){
+foreach ($this->comments as $comment){
 
 ?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?></p>
+    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 <?php
 }
+
 ?>
 
 </body>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.phtml'); ?>
+    <?php require('template.phtml'); ?>

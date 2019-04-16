@@ -6,17 +6,17 @@
 <body>
 
 <?php
-foreach ($billets as $billet)
+foreach ($this->billets as $billet) // mettre a jour les views avec $this->billets au lieux de $billets
 {
     ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($billet['title']) ?>
-            <em>le <?= $billet['billet_date_fr'] ?></em>
+            <?= htmlspecialchars($billet->getTitle()) ?>
+            <em>le <?= $billet->getBilletDate() ?></em>
         </h3>
 
         <p>
-            <em><a href="index.php?action=article&id=<?= $billet['id'] ?>">Lire le chapitre</a></em>
+            <em><a href="index.php?action=article&id=<?= $billet->getId() ?>">Lire le chapitre</a></em>
         </p>
     </div>
     <?php

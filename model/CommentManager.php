@@ -3,6 +3,8 @@
 namespace App\model;
  
 //require_once('DBManager.php'); 
+use App\model\Entity\Comment;
+
 class CommentManager extends DBManager
 {
 
@@ -13,16 +15,22 @@ class CommentManager extends DBManager
     public function getComments($billet_id)
     {
         
-        $comments= $this->db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE billet_id = ? ORDER BY comment_date DESC');
+        $comments= $this->db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y \') AS comment_date_fr FROM comments WHERE billet_id = ? ORDER BY comment_date DESC');
         $comments->execute(array($billet_id));
+        $comments->setFetchMode(\PDO::FETCH_CLASS,Comment::class);
         return $comments;
     }
 
-    
-    public function postComments($billet_id, $author, $comment)
+
+    /**
+     * @param Comment $comment
+     * @return bool
+     */
+    public function postComment($comment)
     {
         $comments = $this->db->prepare('INSERT INTO comments(billet_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($billet_id, $author, $comment));
+        $affectedLines = $comments->execute(array($comment->getBilletId(),$comment->getAuthor(),$comment->getComment()));
+        $comments->setFetchMode(\PDO::FETCH_CLASS,Comment::class);
 
         return $affectedLines;
     }

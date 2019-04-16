@@ -1,11 +1,11 @@
 <?php $title = 'Loging'; ?>
-<?php ob_start(); ?>
-
+<?php ob_start();
+?>
 
 <body>
-<h2> Espace Lecteur</h2>
+<h2> Espace Administrateur</h2>
 <p>Connectez-vous</p>
-    <form action="userHome.php" method="POST">
+    <form action="index?action=adminHome" method="POST">
 			<p><label>identifiant<input type="id" name="id"/></label></p>
 			<p><label>Mot de passe <input type="password" name="password"/></label></p>
 			<p><input type="submit"/></p>
