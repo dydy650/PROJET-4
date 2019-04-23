@@ -1,7 +1,7 @@
 <?php
 namespace App\model;
 
-class DBManager
+abstract class DBManager
 {
     protected $db;
     

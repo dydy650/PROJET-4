@@ -5,14 +5,8 @@ use \App\model\BilletManager;
 use \App\model\CommentManager;
 use App\model\Entity\Comment;
 
-class BlogController
+class BlogController extends AbstractController
 {
-    public $baseUrl;
-
-    public function __construct()
-    {
-        $this->baseUrl = 'http://'. $_SERVER['HTTP_HOST']. "/PHP/P4/";
-    }
 
     public function home()
     {
@@ -43,12 +37,6 @@ class BlogController
 
     }
 
-    public function adminHome()
-    {
-        $this->render('../view/adminHome.phtml');
-
-    }
-
     public function listBillets()
     {
         $billetManager = new BilletManager();
@@ -75,7 +63,7 @@ class BlogController
     public function addComment($billet_id, $author, $content)
     {
         $commentManager = new CommentManager();
-        $comment= new Comment(); // je creé un Objet qui regroupe toute les infos de mon commentaire que je vais utiliser ansuite dans ma methode postComment
+        $comment= new Comment(); // je creé un Objet qui regroupe toute les infos de mon commentaire que je vais utiliser ensuite dans ma methode postComment
         $comment
             ->setAuthor($author)
             ->setComment($content)
@@ -91,24 +79,13 @@ class BlogController
     }
 
 
-    public function NewConnexion($user, $password)
+   /* public function NewConnexion($user, $password)
     {
         $NC = new AdminManager();
-    }
-
-    private function render($view, $params = array()) // methode qui permet de supprimer les requires dans les methodes ci dessus
-    {
-        foreach ($params as $key => $value) {
-            $this->$key = $value;
-        }
-        require $view;
-
-    }
+    }*/
 
 
-  /*  $comment = new Comment();
-    $comment->setAuthor('test')->setContent('test');
-    postComment($comment)*/
+
 
 }
 

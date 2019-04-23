@@ -7,10 +7,11 @@ use App\model\Entity\Billet;
 class BilletManager extends DBManager
 {  
     //connexion a la BDD --> fonction de recupération des donnees
-    public function getBillets()
+
+    public function getBillets() //liste des billets
     {
         
-        $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date_fr FROM billets ORDER BY billet_date DESC LIMIT 0, 5');
+        $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets ORDER BY billet_date DESC LIMIT 0, 5');
         $billets = array();
         $datas->setFetchMode(\PDO::FETCH_CLASS,Billet::class);
             while ($row = $datas->fetch()) 
@@ -22,7 +23,7 @@ class BilletManager extends DBManager
     }
 
 
-    public function getBillet($id)
+    public function getBillet($id) // afficher 1 billet
     {
     
         $req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets WHERE id = ?');
@@ -31,6 +32,25 @@ class BilletManager extends DBManager
         $billet = $req->fetch();
         return $billet;
     }
+
+    /**
+     * @param $billet
+     * @return bool
+     */
+    public function postBillet($billet)
+    {
+        $billets = $this->db->prepare('INSERT INTO billets(id, title, content, billet_date) VALUES(?, ?, ?, NOW())');
+        $req = $billets>execute(array($billet->getId(),$billet->getTitle(),$billet->getContent()));
+        $billets->setFetchMode(\PDO::FETCH_CLASS,Billet::class);
+
+        return $req;
+    }
+
+    public function modifyBillet()
+    {}
+
+    public function deleteBillet()
+    {}
 }
 
 

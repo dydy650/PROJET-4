@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=t2rxstudxt2hitdkqrnxkv7rglexrindzow037agtyjcdq0j"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+</head>
+
+
+<?php $title = 'Billet'; ?>
+<?php ob_start();
+
+?>
+
+<body></br>
+<form action="index.php?action=article&amp;id=?" method="post">
+    <div>
+        <label for="title">Titre</label><br />
+        <input type="text" id="title" name="title" />
+    </div></br>
+    <div>
+        <label for="content">BILLET</label><br />
+        <textarea id="content" name="content"></textarea>
+    </div></br>
+
+    <div>
+        <input type="submit" value="Créer" />
+    </div>
+
+</form>
+
+</body>
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.phtml'); ?>
+

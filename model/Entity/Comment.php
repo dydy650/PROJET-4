@@ -66,7 +66,7 @@ class Comment
      */
     public function getCommentDate()
     {
-        return $this->comment_date_fr;
+        return $this->comment_date;
     }
 
 
