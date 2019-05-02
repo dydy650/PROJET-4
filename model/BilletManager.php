@@ -37,13 +37,12 @@ class BilletManager extends DBManager
      * @param $billet
      * @return bool
      */
-    public function postBillet($billet)
-    {
-        $billets = $this->db->prepare('INSERT INTO billets(id, title, content, billet_date) VALUES(?, ?, ?, NOW())');
-        $req = $billets>execute(array($billet->getId(),$billet->getTitle(),$billet->getContent()));
-        $billets->setFetchMode(\PDO::FETCH_CLASS,Billet::class);
 
-        return $req;
+    public function postBillet($billet) // On recoit le billet a enregistrer
+    {
+        $req = $this->db->prepare('INSERT INTO billets(title, content, billet_date) VALUES(?, ?, NOW())');
+        $success = $req->execute(array($billet->getTitle(),$billet->getContent()));
+        return $this->db->lastInsertId ();
     }
 
     public function modifyBillet()

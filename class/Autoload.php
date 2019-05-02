@@ -8,6 +8,9 @@ class Autoloader{
     
     }
 
+    /**
+     * @param $class
+     */
     static function autoload ($class){
         $class = str_replace(__NAMESPACE__. '\\', '', $class);
         $class = str_replace('\\', '/', $class);

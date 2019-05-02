@@ -61,17 +61,20 @@ if (isset($_GET['action']))
          }
      }
 
-     elseif ($_GET['action'] == 'addBillet') {
-         if (isset($_GET['id'])> 0) {
-             if (!empty($_POST['title']) && !empty($_POST['content'])) {
-                 $adminController->addBillet($_GET['title'], $_POST['content']);
-             } else {
-                 echo 'Erreur : tous les champs ne sont pas remplis !';
-             }
-         } else {
-             echo 'Erreur : aucun identifiant de billet envoyé';
-         }
+     elseif ($_GET['action'] == 'addBillet')
+     {
+                 $adminController->addBillet();
      }
+
+    /*if (isset($_GET['id'])> 0)  {
+         if (!empty($_POST['title']) && !empty($_POST['content'])) {
+             $adminController->addBillet($_GET['title'], $_POST['content']);
+         } else {
+             echo 'Erreur : tous les champs ne sont pas remplis !';
+         }
+     } else {
+         echo 'Erreur : aucun identifiant de billet envoyé';
+     }*/
 
      /* --> a reécrire !
      elseif ($_GET['action'] == 'adminHome')
