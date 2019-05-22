@@ -1,0 +1,16 @@
+<?php $title = 'logout'; ?>
+<?php ob_start(); ?>
+<?php vd($this); ?>
+
+
+<body>
+
+<h2>Vous avez bien été deconnecté</h2>
+<p>Merci de votre visite</p>
+<a href="<?= $this->baseUrl?>public/index.php?action=loginPage" title="">Connexion</a>
+
+</body>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.phtml'); ?>

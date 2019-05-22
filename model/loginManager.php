@@ -5,7 +5,7 @@ namespace App\model;
 
 use App\model\Entity\Login;
 
-class LoginManager extends DBManager
+/*class LoginManager extends DBManager
 
 //  Récupération de l'utilisateur et de son pass hashé
 $req = $this->$bdd->prepare('SELECT password FROM admin');
@@ -31,3 +31,4 @@ else
         echo 'Mauvais identifiant ou mot de passe !';
     }
 }
+loginManager va etre supprimer car cette action va se faire dans Admin Controlleur ?

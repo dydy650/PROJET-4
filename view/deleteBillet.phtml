@@ -1,0 +1,13 @@
+<?php $title = 'Delete Billet'; ?>
+<?php ob_start(); ?>
+
+
+    <body>
+<p>Le chapitre a bien été supprimé</p>
+
+<a href="<?= $this->baseUrl ?>public/index.php?action=home" title="">Retour à l acceuil</a>
+    </body>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.phtml'); ?>

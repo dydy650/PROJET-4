@@ -1,4 +1,5 @@
 <?php
+session_start ();
 
 require('../class/autoload.php');
 use \App\Autoloader;
@@ -17,11 +18,11 @@ if (isset($_GET['action']))
     {
         $blogController->home();
     }
-    elseif ($_GET['action'] == 'articleList') 
+    elseif ($_GET['action'] == 'billetList')
     {
        $blogController->listBillets();
     }
-    elseif($_GET['action'] == 'article') 
+    elseif($_GET['action'] == 'billet')
     {
         $blogController->billet();
     }
@@ -37,13 +38,21 @@ if (isset($_GET['action']))
      {
          $blogController->contactConfirmation();
      }
-     elseif ($_GET['action'] == 'adminBillet'||$_GET['action'] == '')
+     elseif ($_GET['action'] == 'createBillet'||$_GET['action'] == '')
      {
-         $adminController->adminBillet();
+         $adminController->createBillet ();
      }
-     elseif ($_GET['action'] == 'login'||$_GET['action'] == '')
+     elseif ($_GET['action'] == 'editBillet'||$_GET['action'] == '')
+     {
+         $adminController->editBillet();
+     }
+     elseif ($_GET['action'] == 'deleteBillet'||$_GET['action'] == '')
+     {
+         $adminController->deleteBillet();
+     }
+     elseif ($_GET['action'] == 'loginPage'||$_GET['action'] == '')
     {
-        $blogController->login();
+        $blogController->loginPage();
     }
     elseif ($_GET['action'] == 'viewComment'||$_GET['action'] == '') 
     {
@@ -59,36 +68,38 @@ if (isset($_GET['action']))
          } else {
              echo 'Erreur : aucun identifiant de billet envoyé';
          }
+
      }
 
      elseif ($_GET['action'] == 'addBillet')
      {
-                 $adminController->addBillet();
+         $adminController->addBillet();
      }
 
-    /*if (isset($_GET['id'])> 0)  {
-         if (!empty($_POST['title']) && !empty($_POST['content'])) {
-             $adminController->addBillet($_GET['title'], $_POST['content']);
-         } else {
-             echo 'Erreur : tous les champs ne sont pas remplis !';
-         }
-     } else {
-         echo 'Erreur : aucun identifiant de billet envoyé';
+      elseif ($_GET['action'] == 'addUser')
+     {
+         $adminController->addUser();
+     }
+
+     elseif ($_GET['action'] == 'login')
+     {
+         $blogController->login();
+     }
+     elseif ($_GET['action'] == 'adminHome')
+     {
+         $adminController->adminHome();
+     }
+
+     elseif ($_GET['action'] == 'logout')
+     {
+         $blogController->logout();
+     }
+     /*elseif ($_GET['action'] == 'deleteBillet')
+     {
+         $adminController->deleteBillet();
      }*/
 
-     /* --> a reécrire !
-     elseif ($_GET['action'] == 'adminHome')
-        if (isset($_POST['user']) && $_POST['password']) {
-            $blogController->NewConnexion($user, $password);
-            $admins = $Newconnexion->connexion($_POST['pseudo'], $_POST['mdp']);
-            if ($admins == 1)
-            { //si ligne ==1 alors l'utilisateur a rentré un bon identifiant et mot de passe
-                $blogController->adminHome();
-            }
-        }
-        else {
-            $blogController->login();
-        }*/
+
 }
 
 else {
@@ -100,10 +111,10 @@ else {
     }*/
 
 
-function vd($data)
+/*function vd($data)
 {
     echo "<pre>";
     var_dump($data);
     echo "</pre>";
     die;
-}
+}*/

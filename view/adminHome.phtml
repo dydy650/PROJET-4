@@ -1,30 +1,30 @@
 <?php $title = 'Welcome'; ?>
 <?php ob_start(); ?>
+<?php echo $_SESSION['is_admin']; ?>
+
 
 
 <body>
-<h2> Bienvenue dans votre espace</h2>
-<p>Bonjour Mr ForteRoche</p>
+<h2> Espace Administrateur</h2>
+<h3>Bonjour <?php echo $_SESSION['username']; ?></h3>
 
 
      <div id="admin_billet">
-         <<h2>Gestion des chapitres</h2>
-                <ul>
-                    <li><a href="index.php?action=admin_BilletManagement_add" title="">Ajouter un chapitre</a></li>
-                <li><a href="index.php?action=admin_BilletManagement_edit" title="">Modifier  un chapitre</a></li>
-                <li><a href="index.php?action=admin_BilletManagement_delete" title="">Supprimer un chapitre</a></li>
+         <h2>Gestion des chapitres</h2>
+            <ul>
+                 <li><a href="index.php?action=createBillet" title="">Ajouter un chapitre</a></li>
+                <li><a href="index.php?action=billetList" title="">Modifier  un chapitre</a></li>
+                <li><a href="index.php?action=billetList"" title="">Supprimer un chapitre</a></li>
             </ul>
-        </>
 </div>
 
  <div id="admin_comment">
-     <<h2>Gestion des commentaires</h2>
-            <ul>
-                <li><a href="index.php?action=admin_commentManagement" title="">Voir les commentaires</a></li>
-                <li><a href="index.php?action=admin_commentManagement_signaled" title="">Commentaires signalés</a></li>
-                <li><a href="index.php?action=admin_commentManagement_delete" title="">Supprimer un commentaire</a></li>
-            </ul>
-        </>
+     <h2>Gestion des commentaires</h2>
+        <ul>
+            <li><a href="index.php?action=articleList" title="">Voir les commentaires</a></li>
+            <li><a href="index.php?action=articleList" title="">Commentaires signalés</a></li>
+            <li><a href="index.php?action=articleList" title="">Supprimer un commentaire</a></li>
+        </ul>
 </div>
 
 <div id="admin_contact">

@@ -16,7 +16,11 @@ foreach ($this->billets as $billet) // mettre a jour les views avec $this->bille
         </h3>
 
         <p>
-            <em><a href="index.php?action=article&id=<?= $billet->getId() ?>">Lire le chapitre</a></em>
+            <em><a href="index.php?action=billet&id=<?= $billet->getId() ?>"> Lire le chapitre</a></em>
+            <?php if($this->is_admin === true)
+            echo '<a href="index.php?action=editBillet"> modifier</a>
+            <a href="index.php?action=deleteBillet"> Supprimer </a>';
+            ?>
         </p>
     </div>
     <?php

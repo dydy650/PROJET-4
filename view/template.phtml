@@ -10,10 +10,16 @@
         <nav>
             <ul id="navigation">
                 <li><a href="<?= $this->baseUrl ?>public/index.php?action=home" title="">Acceuil</a></li>
-                <li><a href="<?= $this->baseUrl ?>public/index.php?action=articleList" title="">Chapitres</a></li>
+                <li><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="">Chapitres</a></li>
                 <li><a href="<?= $this->baseUrl ?>public/index.php?action=contact" title="">Contact</a></li>
                 <li><a href="<?= $this->baseUrl ?>public/index.php?action=aboutUs" title="">A propos</a></li>
-                <li><a href="<?= $this->baseUrl ?>public/index.php?action=login" title="">Admin</a></li>
+                <?php
+                if(empty($_SESSION['username'])):?>
+                <li><a href="<?= $this->baseUrl ?>public/index.php?action=loginPage" title="">Connexion</a></li>
+                <?php else:?>
+                <li><a href="<?= $this->baseUrl ?>public/index.php?action=logout" title="">déconnexion</a></li>
+                <?php endif;?>
+
             </ul>
         </nav>
 

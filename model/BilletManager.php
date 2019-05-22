@@ -11,7 +11,7 @@ class BilletManager extends DBManager
     public function getBillets() //liste des billets
     {
         
-        $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets ORDER BY billet_date DESC LIMIT 0, 5');
+        $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets ORDER BY id DESC LIMIT 0, 10');
         $billets = array();
         $datas->setFetchMode(\PDO::FETCH_CLASS,Billet::class);
             while ($row = $datas->fetch()) 
@@ -45,11 +45,19 @@ class BilletManager extends DBManager
         return $this->db->lastInsertId ();
     }
 
-    public function modifyBillet()
-    {}
+    /**
+     * @param $id
+     *
+     */
+    public function deleteBillet($id) // suppression de la ligne dans la BDD
+    {
+        $req = $this->db->prepare("DELETE FROM billets WHERE id = ?");
+        $req->execute(array($id));
+        $id = $req->fetch();
+        return $id;
+    }
 
-    public function deleteBillet()
-    {}
+
 }
 
 
