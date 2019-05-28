@@ -7,18 +7,19 @@ class UserManager extends DBManager
 {
 
     /**
-     * @param $user
-     * @return mixed
+     * @param User $user
+     * @return bool vrai si utilisateur enregistre sinon faux
      */
     public function postUser($user) //j'enregistre un user dans la BDD user
     {
         //je hash le password que je stock dans une variable
-        $hash = md5($_POST["password"], PASSWORD_DEFAULT);
-        var_dump($hash);
-        var_dump ($user->getUser());
+        $hash = md5($_POST["password"]);
         //Puis on stock le résultat dans la base de données :
-        $query = $this->db->prepare('INSERT INTO user (username, password) VALUES(username; $hash);');
-        var_dump("New entry database");
+        $req = $this->db->prepare('INSERT INTO user (username, password) VALUES(:username, :password)');
+        return $req->execute(array(
+            'username'=> $user->getUsername(),
+            'password'=> $hash)
+        );
     }
 
 

@@ -1,30 +1,31 @@
+
 h1
 {
     text-align:center;
-    color:blue;
-    font-size:0.9em;
+    color: #52937E;
+    font-size: 0.1em;
 }
 
-body
+h2
 {
-	background-color: #D3DEDC;
-};
 
-h2 {
-    
-    color: darkgreen;
-    border: solid black;
+    color: #52937E;
     border-bottom-color: azure;
 }
-p {
+p
+{
  font-style: italic;
-
+    color: #52937E;
 }
+#menu
+{
 
+    position: absolute;
+}
 #navigation li
 {
- display:inline;
-margin: 15px;
+    display:inline;
+    margin: 15px;
     list-style: none;
 }
 
@@ -33,16 +34,107 @@ margin: 15px;
 list-style: none ;
 margin: 0px ;
 padding: 0px ;
-list-style: none ;
 text-align: center ;
-    
+    border: solid;
 }
 
-#homeTitle 
+#mainTitle
 {
-    font-size: 30px;
-    color: white;
+    color:whitesmoke;
+    font-size: 40px;
+    position: absolute;
+    top: 260px;
+    left: 40%;
+
+
+}
+
+#nameAuteur
+{
+    font-family:"Segoe Print";
+    margin: 15px;
+    color: #52937E;
     position: relative;
+    left: -5px;
+    z-index: 3;
+}
+#surnameAuteur
+{
+    font-family:"Segoe Print";
+    margin: 15px;
+    color: #52937E;
+    position: relative;
+    left: 30px;
+    z-index: 3;
+
+}
+#feather
+{
+    position: relative;
+    left: 50px;
+    opacity: 0.5;
+    z-index: 3;
+
+}
+#cercle
+{
+    height: 170px;
+    color: #52937E;
+    width: 170px;
+    border-radius: 50%;
+    border:solid #C5E1D7 1px;
     align-content: center;
-    
+    box-shadow: #D2E6DF 0px 0px 5px 5px;
+    margin: 10px;
+    top: 60px;
+    position: absolute;
+    background-color: whitesmoke;
+}
+#image1
+{
+    opacity: 0.6;
+    box-shadow: #C5E1D7 0px 0px 10px 5px;
+}
+
+#menu
+{
+    position: relative;
+    margin-top: 20px;
+}
+#JF
+{
+    float: left;
+}
+.nav-link active:hover
+{
+    background-color: #52937E;
+}
+#separation
+{
+    height: 50px;
+    width: 100%;
+}
+
+body
+{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+#btnAdminEdit
+{
+    width: 130px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+#btnAdminDelete
+{
+    width: 130px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+#home
+{
+    position: relative;
+
 }

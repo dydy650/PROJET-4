@@ -22,24 +22,27 @@
     </p>
 </div>
 
-
-<h2>Commentaires</h2>
-
-<form action="index.php?action=addComment&amp;id=<?= $this->billet->getId() ?>" method="post">
-    <div>
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" />
+<div class="col-sm-4">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title"> Commentaires </h2>
+            <form action="index.php?action=addComment&amp;id=<?= $this->billet->getId() ?>" method="post">
+                <div>
+                    <p><label for="author">Auteur</label></p>
+                    <input class="form-control"type="text" id="author" name="author" />
+                </div>
+                <div>
+                    <p><label for="comment">Commentaire</label></p>
+                    <textarea class="form-control" id="comment" name="comment"></textarea>
+                </div><br>
+                <div>
+                    <input class="btn btn-outline-info" type="submit" value="Envoyer" />
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
-    </div>
-    <div>
-        <input type="submit" value="Envoyer" />
-    </div>
-
-</form>
-
+</div>
+<br>
 
 <?php
 foreach ($this->comments as $comment){

@@ -1,26 +1,38 @@
 <?php $title = 'Login'; ?>
 <?php ob_start(); ?>
 
-
-
 <body>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Connectez-vous</h2>
+                 <form action="index.php?action=login" method="POST">
+                    <p><label> Identifiant<input type="text" name="username"  class="form-control"required /></label></p>
+                    <p><label>Mot de passe <input type="password" name="password"  class="form-control"required /></label></p>
+                    <input class="btn btn-outline-info" type="Submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title"> S'inscrire </h2>
+                <form action="index.php?action=addUser" method="POST">
+                   <p><label  for="username">Identifiant</label>
+                    <input id="username" type="text" name="username" class="form-control" required /></p>
+                    <p><label>Mot de passe</label>
+                    <input type="password" name="password" class="form-control" required /></p>
+                    <p><label>Retapez votre mot de passe</label>
+                    <input type="password" name="password2" class="form-control" required  /></p>
+                    <input class="btn btn-outline-info" type="submit" />
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 
-<h2>Connectez-vous</h2>
-    <form action="index.php?action=login" method="POST">
-			<p><label> Identifiant<input type="text" name="username" required /></label></p>
-			<p><label>Mot de passe <input type="password" name="password" required /></label></p>
-			<p><input type="submit"/></p>
-    </form>
-<h2> S'inscrire </h2>
-    <form action="index.php?action=addUser" method="POST">
-        <label>Identifiant :</label>
-        <input type="text" name="username" required /><br /><br />
-        <label>Mot de passe :</label>
-         <input type="password" name="password" required /><br /><br />
-         <label>Retapez mot de passe :</label>
-        <input type="password" name="password2" required /><br /><br />
-        <input type="submit" />
-    </form>
 
 </body>
 

@@ -1,0 +1,16 @@
+<?php $title = 'newUser'; ?>
+<?php ob_start(); ?>
+<?php vd($NU); ?>
+
+
+    <body>
+
+    <h2>Nouveau id créés</h2>
+
+    <a href="<?= $this->baseUrl?>public/index.php?action=loginPage" title="">Connexion</a>
+
+    </body>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.phtml'); ?>

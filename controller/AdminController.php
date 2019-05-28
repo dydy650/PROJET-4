@@ -27,6 +27,7 @@ class AdminController extends AbstractController
 
     public function deleteBillet()
     {
+
         $this->render ('../view/deleteBillet.phtml');
 
     }
@@ -69,28 +70,30 @@ class AdminController extends AbstractController
     }*/
 
 
-    /**
-     * @throws \Exception
-     */
+
     public function addUser()
     {
-
-        if(empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])){
-            throw new \Exception('error !');
-        }else{
-            if (isset($_POST["user"]) && isset($_POST["password"]) && isset($_POST["password2"])) {
-                if ($_POST["password"] == $_POST["password2"]) {
-                    $adminManager =  new UserManager();
-                    $user= new User;
-                    $user
-                        ->setUser ($_POST['user'])
-                        ->setPassword($_POST["password"]);
-
-                   $NU = $adminManager->postUser($user);
+        if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
+            echo 'error';
+            //throw new \Exception('error !');
+        } else {
+                 if ($_POST['password'] === $_POST['password2']) {
+                $userManager = new UserManager();
+                $user = new User;
+                $user
+                    ->setUsername ($_POST['username'])
+                    ->setPassword ($_POST["password"]);
+               $result = $userManager->postUser($user);
+               if ($result){
+                   $this->addFlash('success','votre compte est enregistré');
+               }else{
+                   $this->addFlash('danger','votre compte n\'a pas pu etre enregistré');
+               }
+                header ('Location:index.php?action=loginPage');
 
                 }
             }
         }
-    }
-
 }
+
+
