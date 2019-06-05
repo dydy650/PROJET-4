@@ -6,7 +6,6 @@ use \App\Autoloader;
 use \App\controller\BlogController;
 use \App\controller\AdminController;
 
-
 Autoloader::Register();
 
 $blogController = new BlogController();
@@ -26,35 +25,27 @@ if (isset($_GET['action']))
     {
         $blogController->billet();
     }
-    elseif ($_GET['action'] == 'aboutUs'||$_GET['action'] == '') 
+    elseif ($_GET['action'] == 'aboutUs')
     {
         $blogController->aboutUs();
     }
-    elseif ($_GET['action'] == 'contact'||$_GET['action'] == '') 
+    elseif ($_GET['action'] == 'contact')
     {
         $blogController->contact();
     }
-     elseif ($_GET['action'] == 'contact_confirmation'||$_GET['action'] == '')
+     elseif ($_GET['action'] == 'contact_confirmation')
      {
          $blogController->contactConfirmation();
      }
-     elseif ($_GET['action'] == 'createBillet'||$_GET['action'] == '')
+     elseif ($_GET['action'] == 'createBillet')
      {
          $adminController->createBillet ();
      }
-     elseif ($_GET['action'] == 'editBillet'||$_GET['action'] == '')
-     {
-         $adminController->editBillet();
-     }
-     elseif ($_GET['action'] == 'deleteBillet'||$_GET['action'] == '')
-     {
-         $adminController->deleteBillet();
-     }
-     elseif ($_GET['action'] == 'loginPage'||$_GET['action'] == '')
+     elseif ($_GET['action'] == 'loginPage')
     {
         $blogController->loginPage();
     }
-    elseif ($_GET['action'] == 'viewComment'||$_GET['action'] == '') 
+    elseif ($_GET['action'] == 'viewComment')
     {
         $blogController->viewComment();
     }
@@ -70,17 +61,14 @@ if (isset($_GET['action']))
          }
 
      }
-
      elseif ($_GET['action'] == 'addBillet')
      {
          $adminController->addBillet();
      }
-
       elseif ($_GET['action'] == 'addUser')
      {
          $adminController->addUser();
      }
-
      elseif ($_GET['action'] == 'login')
      {
          $blogController->login();
@@ -89,32 +77,34 @@ if (isset($_GET['action']))
      {
          $adminController->adminHome();
      }
-
      elseif ($_GET['action'] == 'logout')
      {
          $blogController->logout();
      }
-     /*elseif ($_GET['action'] == 'deleteBillet')
+     elseif ($_GET['action'] == 'deleteBillet' AND isset($_GET['id']))
      {
-         $adminController->deleteBillet();
-     }*/
-
-
+         $id = $_GET['id'];
+         $adminController->deleteBillet($id);
+     }
+     elseif ($_GET['action'] == 'editBillet' AND isset($_GET['id']))
+     {
+         $id = $_GET['id'];
+         $adminController->editBillet($id);
+     }
+     elseif ($_GET['action'] == 'updateBillet')
+     {
+         $adminController->updateBillet();
+     }
 }
 
 else {
     echo'Pas d\'autres pages disponibles pour le moment';
     }
 
-/*else {
-    $blogController->home();    
-    }*/
-
-
-/*function vd($data)
+function vd($data)
 {
     echo "<pre>";
     var_dump($data);
     echo "</pre>";
     die;
-}*/
+}

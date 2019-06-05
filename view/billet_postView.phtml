@@ -29,7 +29,12 @@
             <form action="index.php?action=addComment&amp;id=<?= $this->billet->getId() ?>" method="post">
                 <div>
                     <p><label for="author">Auteur</label></p>
-                    <input class="form-control"type="text" id="author" name="author" />
+                    <input class="form-control" type="text" id="author" name="author"
+                          <?php
+                            if(!empty($_SESSION['username'])):?>
+                            value="<?php echo ($_SESSION['username'])?>"
+                            <?php endif; ?>
+                    />
                 </div>
                 <div>
                     <p><label for="comment">Commentaire</label></p>
@@ -51,11 +56,10 @@ foreach ($this->comments as $comment){
     <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 <?php
 }
-
 ?>
 
 </body>
 
 <?php $content = ob_get_clean(); ?>
 
-    <?php require('template.phtml'); ?>
+<?php require('template.phtml'); ?>

@@ -46,12 +46,28 @@ class BilletManager extends DBManager
     }
 
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function deleteBillet($id) // suppression de la ligne dans la BDD
     {
-        $delete= $this->db->prepare("DELETE FROM billets WHERE id = ?");
-        $delete->execute(array($id));
+        $req = $this->db->prepare("DELETE FROM billets WHERE id = ?");
+        $result = $req->execute(array($id));
+        return $result;
+
     }
 
+    /**
+     * @param $id
+     */
+
+
+    public function updateBillet($billet)
+    {
+        $update =  $this->db->prepare('UPDATE billets SET title = ?, content = ?, billet_date = NOW() WHERE id = ?');
+        $update->execute (array($billet->getTitle(),$billet->getContent()));
+    }
 
 }
 

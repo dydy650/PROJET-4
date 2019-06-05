@@ -1,42 +1,39 @@
 <?php $title = 'Welcome'; ?>
 <?php ob_start(); ?>
-<?php echo $_SESSION['is_admin']; ?>
-
-
 
 <body>
-<h2> Espace Administrateur</h2>
-<h3>Bonjour <?php echo $_SESSION['username']; ?></h3>
+<h2> Espace Administrateur </h2>
+<br>
+<h3>Bonjour <?php echo $_SESSION['username']; ?></h3><br>
 
-
-     <div id="admin_billet">
-         <h2>Gestion des chapitres</h2>
-            <ul>
-                 <li><a href="index.php?action=createBillet" title="">Ajouter un chapitre</a></li>
-                <li><a href="index.php?action=billetList" title="">Modifier  un chapitre</a></li>
-                <li><a href="index.php?action=billetList"" title="">Supprimer un chapitre</a></li>
-            </ul>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body" id="admin_billet">
+                <h2 class="card-title">Gestion des chapitres</h2>
+                <ul>
+                    <li><a href="index.php?action=createBillet" title="">Ajouter un chapitre</a></li>
+                    <li><a href="index.php?action=billetList" title="">Modifier  un chapitre</a></li>
+                    <li><a href="index.php?action=billetList"" title="">Supprimer un chapitre</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body" id="admin_comments">
+                <h2 class="card-title"> Gestion des commentaires</h2>
+                <ul>
+                    <li><a href="index.php?action=articleList" title="">Voir les commentaires</a></li>
+                    <li><a href="index.php?action=articleList" title="">Commentaires signalés</a></li>
+                    <li><a href="index.php?action=articleList" title="">Supprimer un commentaire</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-
- <div id="admin_comment">
-     <h2>Gestion des commentaires</h2>
-        <ul>
-            <li><a href="index.php?action=articleList" title="">Voir les commentaires</a></li>
-            <li><a href="index.php?action=articleList" title="">Commentaires signalés</a></li>
-            <li><a href="index.php?action=articleList" title="">Supprimer un commentaire</a></li>
-        </ul>
+<br>
 </div>
-
-<div id="admin_contact">
-    <h2>Gestion des messages</h2>
-    <ul>
-        <li><a href="index.php?action=admin_commentManagement" title="">Messages lecteurs</a></li>
-        <li><a href="index.php?action=admin_commentManagement_signaled" title="">Commentaires signalés</a></li>
-        <li><a href="index.php?action=admin_commentManagement_delete" title="">Supprimer un commentaire</a></li>
-    </ul>
-</>
-</div>
-
 
 
 </body>

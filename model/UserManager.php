@@ -5,7 +5,6 @@ use App\model\Entity\User;
 
 class UserManager extends DBManager
 {
-
     /**
      * @param User $user
      * @return bool vrai si utilisateur enregistre sinon faux
@@ -22,9 +21,6 @@ class UserManager extends DBManager
         );
     }
 
-
-
-
     /**
      * @param $username
      * @return User
@@ -38,7 +34,6 @@ class UserManager extends DBManager
         $user= $req->fetch();
         return $user;
     }
-
 
 }
 

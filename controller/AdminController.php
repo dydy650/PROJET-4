@@ -18,22 +18,12 @@ class AdminController extends AbstractController
         $this->render ('../view/adminHome.phtml');
 
     }
-
     public function createBillet()
     {
         $this->render ('../view/createBillet.phtml');
 
     }
-
-    public function deleteBillet()
-    {
-
-        $this->render ('../view/deleteBillet.phtml');
-
-    }
-
-
-    /**
+    /*
      * @param $title
      * @param $content
      */
@@ -41,7 +31,7 @@ class AdminController extends AbstractController
     {
         //une condition qui vérifie si les données $_POST sont présentes, sinon on lève une Exception
         //On instancie un nouveau billet, donc vide
-        //On hydrate le billet avec les données $_POST, puisqu'on sait qu'elles sont présentes
+        //On hydrate le billet avec les données $_POST, puisqu\'on sait qu\'elles sont présentes
         //On envoie le billet hydraté au model
         if (empty($_POST['title']) || empty($_POST['content'])) {
             echo "il manque des datas";
@@ -55,22 +45,21 @@ class AdminController extends AbstractController
                 ->setContent ($_POST['content']);
 
             $id = $billetManager->postBillet ($billet);
-            if ($id === false) {
+            if ($id){
+                $this->addFlash('success','Le chapitre a été créé');
+            }else{
+                $this->addFlash('danger','votre chapitre n\'a pas pu etre enregistré');
+            }
+            header ('Location: index.php?action=billet&id=' . $id);
+        }
+           /* if ($id === false) {
                 throw new \Exception('Impossible d\'ajouter le billet !');
             } else {
                 header ('Location: index.php?action=billet&id=' . $id);
             }
-        }
+        }*/
 
     }
-
-   /*public function editBillet()
-    {
-
-    }*/
-
-
-
     public function addUser()
     {
         if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
@@ -90,10 +79,43 @@ class AdminController extends AbstractController
                    $this->addFlash('danger','votre compte n\'a pas pu etre enregistré');
                }
                 header ('Location:index.php?action=loginPage');
-
                 }
             }
         }
+    public function deleteBillet($id)
+    {
+        $billetmanager = new BilletManager();
+        $delete = $billetmanager->deleteBillet($id);
+        if ($delete)
+        {
+            $this->addFlash('success','le billet a bien été supprimé');
+        }else{
+            $this->addFlash('warning','erreur le billet n a pas été supprimé');
+                  }
+        header ('Location:index.php?action=home');
+    }
+    public function editBillet($id)
+   {
+       $billetManager = new BilletManager();
+       $billet = $billetManager->getBillet ($id);
+       $this->render ('../view/editBillet.phtml', array("billet" => $billet));
+   }
+    public function updateBillet()
+    {
+        $billetManager = new BilletManager();
+        $billet = new Billet();
+        $billet
+            ->setTitle ($_POST['title'])
+            ->setContent ($_POST['content']);
+
+        $id = $billetManager->updateBillet($billet);
+        if ($id){
+            $this->addFlash('success','Le chapitre a été modifié');
+        }else{
+            $this->addFlash('danger','votre chapitre n\'a pas pu etre mis à jour');
+        }
+        header ('Location: index.php?action=billet&id=' . $id);
+    }
 }
 
 

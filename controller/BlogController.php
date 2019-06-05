@@ -37,9 +37,6 @@ class BlogController extends AbstractController
         $this->render ('../view/loginPage.phtml');
     }
 
-
-
-
     public function listBillets()
     {
         $billetManager = new BilletManager();

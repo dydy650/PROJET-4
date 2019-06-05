@@ -9,22 +9,22 @@
 <?php $title = 'Modification Billet'; ?>
 <?php ob_start();
 
-
 ?>
 
 <body></br>
-
-<form action="index.php?action=modifyBillet" method="post">
+<p><a href="index.php?action=billetList">Retour à la liste des billets</a></p>
+<form action="index.php?action=updateBillet" method="post">
     <div>
         <label for="title">Titre</label><br />
         <input type="text" id="title" name="title" value="<?= htmlspecialchars($this->billet->getTitle()) ?>"/>
     </div></br>
     <div>
         <label for="content">BILLET</label><br />
-        <textarea id="content" name="content" value="<?= htmlspecialchars($this->billet->getContent()) ?>"></textarea>
-    </div></br>
+        <textarea type="textarea" id="content" name="content" value="<?= htmlspecialchars($this->billet->getContent()) ?>"></textarea>
+    </div>
+
     <div>
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Mise à jour" />
     </div>
 
 </form>
