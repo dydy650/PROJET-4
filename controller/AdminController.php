@@ -8,7 +8,9 @@ use App\model\UserManager;
 use App\model\BilletManager;
 use App\model\DBManager;
 use App\model\Entity\Billet;
+use App\model\Entity\Comment;
 use App\model\Entity\User;
+use \App\model\CommentManager;
 
 
 class AdminController extends AbstractController
@@ -94,27 +96,48 @@ class AdminController extends AbstractController
                   }
         header ('Location:index.php?action=home');
     }
-    public function editBillet($id)
+    public function editBillet($id) // je recupère les datas du billet et je redigier vers la page edit pre rempli
    {
        $billetManager = new BilletManager();
-       $billet = $billetManager->getBillet ($id);
+       $billet = $billetManager->getBillet($id);
+       var_dump ($billet);
        $this->render ('../view/editBillet.phtml', array("billet" => $billet));
    }
-    public function updateBillet()
+    public function updateBillet($id)
     {
-        $billetManager = new BilletManager();
-        $billet = new Billet();
-        $billet
-            ->setTitle ($_POST['title'])
-            ->setContent ($_POST['content']);
 
-        $id = $billetManager->updateBillet($billet);
-        if ($id){
+        $billetManager = new BilletManager();
+        $billet = new billet();
+        $billet
+            ->setId ($_GET['id'])
+            ->setTitle ($_POST['title'])
+            ->setContent($_POST['content']);
+        var_dump ($billet);
+        $update = $billetManager->updateBillet($billet);
+        if ($update){
             $this->addFlash('success','Le chapitre a été modifié');
         }else{
             $this->addFlash('danger','votre chapitre n\'a pas pu etre mis à jour');
         }
         header ('Location: index.php?action=billet&id=' . $id);
+    }
+    public function signalComment($id)
+    {
+        $commentManager = new CommentManager();
+
+        $signal = $commentManager->signalComment($id);
+        if ($signal){
+            $this->addFlash('success','Commentaire signalé');
+        }else{
+            $this->addFlash('danger','impossible de signaler le commentaire');
+        }
+        header ('Location: index.php?action=billet&id=' . $id);
+    }
+    public function signalCommentList()
+    {
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getSignalComment();
+        $this->render('../view/adminSignalComment.phtml', array("comments" => $comments));
     }
 }
 

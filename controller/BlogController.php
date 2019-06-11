@@ -51,13 +51,13 @@ class BlogController extends AbstractController
 
         $billet = $billetManager->getBillet ($_GET['id']);
         $comments = $commentManager->getComments ($_GET['id']);
-        $this->render ('../view/billet_postView.phtml', array("billet" => $billet, "comments" => $comments));
+        $this->render('../view/billet_postView.phtml', array("billet" => $billet, "comments" => $comments));
     }
 
     /**
      * @param $billet_id
      * @param $author
-     * @param $comment
+     * @param $content
      * @throws \Exception
      */
     public function addComment($billet_id, $author, $content)
@@ -72,7 +72,7 @@ class BlogController extends AbstractController
         $affectedLines = $commentManager->postComment ($comment);
 
         if ($affectedLines === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire !');
+            throw new \Exception('Impossible d\'ajouter le commentaire');
         } else {
             header ('Location: index.php?action=billet&id=' . $billet_id);
         }

@@ -54,6 +54,11 @@ foreach ($this->comments as $comment){
 ?>
     <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?></p>
     <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+    <?php
+    if(!empty($_SESSION['username'])):?>
+        <a href="index.php?action=signalComment&id=<?= $comment->getId () ?>"
+        <small id="btnSignal" class="btn btn-outline-warning"> Signaler</a></small><br>
+    <?php endif; ?>
 <?php
 }
 ?>

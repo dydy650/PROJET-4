@@ -29,14 +29,6 @@ if (isset($_GET['action']))
     {
         $blogController->aboutUs();
     }
-    elseif ($_GET['action'] == 'contact')
-    {
-        $blogController->contact();
-    }
-     elseif ($_GET['action'] == 'contact_confirmation')
-     {
-         $blogController->contactConfirmation();
-     }
      elseif ($_GET['action'] == 'createBillet')
      {
          $adminController->createBillet ();
@@ -91,9 +83,19 @@ if (isset($_GET['action']))
          $id = $_GET['id'];
          $adminController->editBillet($id);
      }
-     elseif ($_GET['action'] == 'updateBillet')
+     elseif ($_GET['action'] == 'updateBillet' AND isset($_GET['id']))
      {
-         $adminController->updateBillet();
+         $id = $_GET['id'];
+         $adminController->updateBillet($id);
+     }
+     elseif ($_GET['action'] == 'signalComment'AND isset($_GET['id']))
+     {
+         $id = $_GET['id'];
+         $adminController->signalComment($id);
+     }
+     elseif ($_GET['action'] == 'signalCommentList')
+     {
+         $adminController->signalCommentList();
      }
 }
 

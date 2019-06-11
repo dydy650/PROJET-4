@@ -1,0 +1,38 @@
+<?php $title = 'Welcome'; ?>
+<?php ob_start(); ?>
+
+    <body>
+    <h2> Espace Administrateur </h2>
+    <br>
+    <h3>Bonjour <?php echo $_SESSION['username']; ?></h3><br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body" id="admin_comments">
+                    <h2 class="card-title"> Commentaires signalés</h2>
+                    <ul>
+<?php
+foreach ($this->comments as $comment)
+{
+    ?>
+    <div class="list-group">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> <?= htmlspecialchars ($comment->getAuthor ()) ?></h5>
+                <small><em>le <?= $comment->getComment () ?></em></small>
+            </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <?php
+    }
+    ?>
+
+    </body>
+
+    <?php $content = ob_get_clean(); ?>
+
+    <?php require('template.phtml'); ?>

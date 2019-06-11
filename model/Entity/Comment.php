@@ -7,6 +7,13 @@ namespace App\model\Entity;
  */
 class Comment
 {
+    private $id;
+    private $author;
+    private $comment;
+    private $comment_date;
+    private $billet_id;
+    private $is_signaled;
+
     /**
      * @return mixed
      */
@@ -69,8 +76,6 @@ class Comment
         return $this->comment_date;
     }
 
-
-
     /**
      * @param mixed $comment_date
      * @return Comment
@@ -99,10 +104,24 @@ class Comment
         return $this;
     }
 
-    private $id;
-    private $author;
-    private $comment;
-    private $comment_date;
-    private $billet_id;
+    /**
+     * @return mixed
+     */
+    public function getIsSignaled()
+    {
+        return $this->is_signaled;
+    }
+
+    /**
+     * @param mixed $is_signaled
+     * @return Comment
+     */
+    public function setIsSignaled($is_signaled)
+    {
+        $this->is_signaled = $is_signaled;
+        return $this;
+    }
+
+
 
 }

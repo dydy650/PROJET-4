@@ -13,41 +13,36 @@ class BilletManager extends DBManager
         
         $datas =$this->db->query('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets ORDER BY id DESC LIMIT 0, 10');
         $billets = array();
-        $datas->setFetchMode(\PDO::FETCH_CLASS,Billet::class);
-            while ($row = $datas->fetch()) 
+        $datas->setFetchMode(\PDO::FETCH_CLASS,Billet::class); // on veux recupérer une class billet
+        while ($billet = $datas->fetch())  // tant qu on peut lire une ligne on fait la boucle
         {
-            $billets[] = $row;
+            $billets[] = $billet; // on rajoute la ligne dans le tableau
         }
-        $datas->closeCursor();
-        return $billets;
+        $datas->closeCursor(); // on libere la memoire
+        return $billets; //le tableau est bien rempli
     }
 
 
     public function getBillet($id) // afficher 1 billet
     {
-    
         $req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets WHERE id = ?');
         $req->execute(array($id));
         $req->setFetchMode(\PDO::FETCH_CLASS,Billet::class); // Ligne necessaire pour utiliser les entitiés ddans les vues
         $billet = $req->fetch();
         return $billet;
     }
-
     /**
-     * @param $billet
+     * @param Billet $billet
      * @return bool
      */
-
     public function postBillet($billet) // On recoit le billet a enregistrer
     {
         $req = $this->db->prepare('INSERT INTO billets(title, content, billet_date) VALUES(?, ?, NOW())');
-        $success = $req->execute(array($billet->getTitle(),$billet->getContent()));
+        $req->execute(array($billet->getTitle(),$billet->getContent()));
         return $this->db->lastInsertId ();
     }
-
-
     /**
-     * @param $id
+     * @param int $id
      * @return bool
      */
     public function deleteBillet($id) // suppression de la ligne dans la BDD
@@ -59,14 +54,14 @@ class BilletManager extends DBManager
     }
 
     /**
-     * @param $id
+     * @param Billet $billet
+     * @return bool
      */
-
-
     public function updateBillet($billet)
     {
-        $update =  $this->db->prepare('UPDATE billets SET title = ?, content = ?, billet_date = NOW() WHERE id = ?');
-        $update->execute (array($billet->getTitle(),$billet->getContent()));
+        $req =  $this->db->prepare('UPDATE billets SET title = ?, content = ? WHERE id = ?');
+        $result = $req->execute(array($billet->getTitle(),$billet->getContent(),$billet->getId()));
+        return $result;
     }
 
 }
