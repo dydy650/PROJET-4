@@ -1,52 +1,47 @@
 <?php $title = 'HomePage'; ?>
-<?php ob_start(); ?>
+<?php ob_start (); ?>
 
+    <div id="home">
+        <h2>Partez avec David Vann dans une aventure hors norme</h2><br>
 
-<body>
-<div id="home">
-    <h2>Partez avec David Vann dans une aventure hors norme</h2><br>
+        <p>David Vann est un enfant du pays, il plante merveilleusement l'atmosphère : une île du Sud de l'Alaska,
+            isolée, sauvage, faite de montagnes escarpées, couverte de forêts, où Jim décide de s'installer pour un an,
+            avec son fils de 13 ans. <br>
+            Prendre un nouveau départ dans ce décor à la beauté vierge. Cela dérape, puis c'est le drame.
+            Un ouvrage marquant, couronné par de multiples prix, en France le prix Médicis étranger, le prix des
+            lecteurs de L'Express, le prix des Lecteurs de la Maison du Livre de Rodez et le prix du Marais.</p>
+    </div>
+    <br>
+    <div id="blocHome">
+        <div class="card-deck">
+            <div class="card">
+                <img src="http://localhost/PHP/P4/public/img/image2.jpg" class="card-img-top" alt="ing2">
+                <div class="card-body">
+                    <h5><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" class="card-title">Tous les
+                            chapitres</a></h5>
+                </div>
 
-<p>David Vann est un enfant du pays, il plante merveilleusement l'atmosphère : une île du Sud de l'Alaska, isolée, sauvage, faite de montagnes escarpées, couverte de forêts, où Jim décide de s'installer pour un an, avec son fils de 13 ans. <br>
-    Prendre un nouveau départ dans ce décor à la beauté vierge. Cela dérape, puis c'est le drame.
-    Un ouvrage marquant, couronné par de multiples prix, en France le prix Médicis étranger, le prix des lecteurs de L'Express, le prix des Lecteurs de la Maison du Livre de Rodez et le prix du Marais.</p>
-</div>
-<br>
-<div id="blocHome">
-<div class="card-deck">
-    <div class="card">
-        <img src="http://localhost/PHP/P4/public/img/image2.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5> <a href="<?= $this->baseUrl ?>public/index.php?action=billetList"class="card-title">Tous les chapitres</a></h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+            <div class="card">
+                <img src="http://localhost/PHP/P4/public/img/image4.jpg" class="card-img-top" alt="img4">
+                <div class="card-body">
+                    <h5><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" class="card-title">Dernier
+                            episode</a></h5>
+                </div>
+
+            </div>
+            <div class="card">
+                <img src="http://localhost/PHP/P4/public/img/JF.jpg" class="card-img-top" alt="JF">
+                <div class="card-body">
+                    <h5><a href="<?= $this->baseUrl ?>public/index.php?action=aboutUs" class="card-title">Decouvrez
+                            moi</a></h5>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="card">
-        <img src="http://localhost/PHP/P4/public/img/image4.jpg"" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5> <a href="<?= $this->baseUrl ?>public/index.php?action=billetList"class="card-title">Dernier episode</a></h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img src="http://localhost/PHP/P4/public/img/JF.jpg"" class="card-img-top" alt="...">
-        <div class="card-body" >
-            <h5> <a href="<?= $this->baseUrl ?>public/index.php?action=aboutUs"class="card-title">Decouvrez moi</a></h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-</div>
-</div>
-</body>
 
-<?php $content = ob_get_clean(); ?>
 
-<?php require('template.phtml'); ?>
+<?php $content = ob_get_clean (); ?>
+
+<?php require ('template.phtml'); ?>

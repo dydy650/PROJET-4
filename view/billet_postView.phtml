@@ -1,70 +1,75 @@
 <?php $title = 'postview'; ?>
-<?php ob_start(); ?>
+<?php ob_start (); ?>
 
 
-<body>
-
-<?php $title = htmlspecialchars($this->billet->getTitle()); ?>
+<?php $title = htmlspecialchars ($this->billet->getTitle ()); ?>
 
 
-<?php ob_start(); ?>
+<?php ob_start (); ?>
 
-<p><a href="index.php?action=billetList">Retour à la liste des billets</a></p>
+    <p><a href="<?= $this->baseUrl ?>public/index.php?action=billetList">Retour à la liste des billets</a></p>
 
-<div class="news">
-    <h3>
-        <?= htmlspecialchars($this->billet->getTitle()) ?>
-        <em>le <?= $this->billet->getBilletDate() ?></em>
-    </h3>
+    <div class="news">
+        <h3>
+            <?= htmlspecialchars ($this->billet->getTitle ()) ?>
+            <em>le <?= $this->billet->getBilletDate () ?></em>
+        </h3>
 
-    <p>
-        <?= nl2br($this->billet->getContent()) ?>
-    </p>
-</div>
+        <p>
+            <?= nl2br ($this->billet->getContent ()) ?>
+        </p>
+    </div>
 
-<div class="col-sm-4">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title"> Commentaires </h2>
-            <form action="index.php?action=addComment&amp;id=<?= $this->billet->getId() ?>" method="post">
-                <div>
-                    <p><label for="author">Auteur</label></p>
-                    <input class="form-control" type="text" id="author" name="author"
-                          <?php
-                            if(!empty($_SESSION['username'])):?>
-                            value="<?php echo ($_SESSION['username'])?>"
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title"> Commentaires </h2>
+                <form action="<?= $this->baseUrl ?>public/index.php?action=addComment&amp;id=<?= $this->billet->getId () ?>"
+                      method="post">
+                    <div>
+                        <p><label for="author">Auteur</label></p>
+                        <input class="form-control" type="text" id="author" name="author"
+                            <?php
+                            if (!empty($_SESSION['username'])):?>
+                                value="<?php echo ($_SESSION['username']) ?>"
                             <?php endif; ?>
-                    />
-                </div>
-                <div>
-                    <p><label for="comment">Commentaire</label></p>
-                    <textarea class="form-control" id="comment" name="comment"></textarea>
-                </div><br>
-                <div>
-                    <input class="btn btn-outline-info" type="submit" value="Envoyer" />
-                </div>
-            </form>
+                        />
+                    </div>
+                    <div>
+                        <p><label for="comment">Commentaire</label></p>
+                        <textarea class="form-control" id="comment" name="comment"></textarea>
+                    </div>
+                    <br>
+                    <div>
+                        <input class="btn btn-outline-info" type="submit" value="Envoyer"/>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<br>
+    <br>
 
 <?php
-foreach ($this->comments as $comment){
-?>
-    <p><strong><?= htmlspecialchars($comment->getAuthor()) ?></strong> le <?= $comment->getCommentDate() ?></p>
-    <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+foreach ($this->comments as $comment) {
+    ?>
+    <p><strong><?= htmlspecialchars ($comment->getAuthor ()) ?></strong> le <?= $comment->getCommentDate () ?></p>
+    <p><?= nl2br (htmlspecialchars ($comment->getComment ())) ?></p>
     <?php
-    if(!empty($_SESSION['username'])):?>
-        <a href="index.php?action=signalComment&id=<?= $comment->getId () ?>"
-        <small id="btnSignal" class="btn btn-outline-warning"> Signaler</a></small><br>
+    if (!empty($_SESSION['username'])):?>
+        <a href="<?= $this->baseUrl ?>public/index.php?action=signalComment&id=<?= $comment->getId () ?>"
+           class="btn btn-outline-warning">Signaler</a>
+        <?php if ($this->is_admin === true) { ?>
+            <a href="<?= $this->baseUrl ?>public/index.php?action=deleteComment&id=<?= $comment->getId () ?>"
+               class="btn btn-outline-warning">Supprimer</a>
+            <br>
+            <br>
+        <?php } ?>
     <?php endif; ?>
-<?php
+    <?php
 }
 ?>
 
-</body>
 
-<?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean (); ?>
 
-<?php require('template.phtml'); ?>
+<?php require ('template.phtml'); ?>

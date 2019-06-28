@@ -1,31 +1,25 @@
-
 <?php $title = 'Article'; ?>
-<?php ob_start(); ?>
-
-    <body>
+<?php ob_start (); ?>
 
 <?php
-foreach ($this->billets as $billet){
-?>
+foreach ($this->billets as $billet) {
+    ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($billet->getTitle()) ?>
-            <em>le <?= $billet->getBilletDate() ?></em>
+            <?= htmlspecialchars ($billet->getTitle ()) ?>
+            <em>le <?= $billet->getBilletDate () ?></em>
         </h3>
-        
+
         <p>
-            <?= nl2br(htmlspecialchars($billet->getContent())) ?>
-            <br />
-            <em><a href="index.php?action=article&id=<?= $billet->getId() ?>">Commentaires</a></em>
+            <?= nl2br (htmlspecialchars ($billet->getContent ())) ?>
+            <br/>
+            <em><a href="<?= $this->baseUrl ?>public/index.php?action=article&id=<?= $billet->getId () ?>">Commentaires</a></em>
         </p>
     </div>
-<?php
+    <?php
 }
-
 ?>
-     
-  </body>
 
-<?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean (); ?>
 
-<?php require('template.phtml'); ?>
+<?php require ('template.phtml'); ?>

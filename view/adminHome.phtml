@@ -1,42 +1,44 @@
 <?php $title = 'Welcome'; ?>
-<?php ob_start(); ?>
+<?php ob_start (); ?>
 
-<body>
-<h2> Espace Administrateur </h2>
-<br>
-<h3>Bonjour <?php echo $_SESSION['username']; ?></h3><br>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body" id="admin_billet">
-                <h2 class="card-title">Gestion des chapitres</h2>
-                <ul>
-                    <li><a href="index.php?action=createBillet" title="">Ajouter un chapitre</a></li>
-                    <li><a href="index.php?action=billetList" title="">Modifier  un chapitre</a></li>
-                    <li><a href="index.php?action=billetList"" title="">Supprimer un chapitre</a></li>
-                </ul>
+    <h2> Espace Administrateur </h2>
+    <br>
+    <h3>Bonjour <?php echo $_SESSION['username']; ?></h3><br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body" id="admin_billet">
+                    <h2 class="card-title">Gestion des chapitres</h2>
+                    <ul>
+                        <li><a href="<?= $this->baseUrl ?>public/index.php?action=createBillet" title="">Ajouter un
+                                chapitre</a></li>
+                        <li><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="">Modifier un
+                                chapitre</a></li>
+                        <li><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="">Supprimer un
+                                chapitre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body" id="admin_comments">
+                    <h2 class="card-title"> Gestion des commentaires</h2>
+                    <ul>
+                        <li><a href="<?= $this->baseUrl ?>public/index.php?action=signalCommentList" title="">Commentaires
+                                signalés</a></li>
+                        <li><a href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="">Supprimer un
+                                commentaire</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body" id="admin_comments">
-                <h2 class="card-title"> Gestion des commentaires</h2>
-                <ul>
-                    <li><a href="index.php?action=signalCommentList" title="">Commentaires signalés</a></li>
-                    <li><a href="index.php?action=articleList" title="">Supprimer un commentaire</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-</div>
+    <br>
 
 
-</body>
+<?php $content = ob_get_clean (); ?>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require('template.phtml'); ?>
+<?php require ('template.phtml'); ?>

@@ -7,7 +7,6 @@ use App\model\Entity\Comment;
 
 class CommentManager extends DBManager
 {
-
     /**
      * @param $billet_id
      * @return bool|\PDOStatement
@@ -20,19 +19,18 @@ class CommentManager extends DBManager
         $comments->setFetchMode(\PDO::FETCH_CLASS,Comment::class);
         return $comments;
     }
-
-
     /**
      * @param Comment $comment
      * @return bool
      */
     public function postComment($comment)
     {
-        $comments = $this->db->prepare('INSERT INTO comments(billet_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($comment->getBilletId(),$comment->getAuthor(),$comment->getComment()));
-       //$comments->setFetchMode(\PDO::FETCH_CLASS,Comment::class);
-
+        $req = $this->db->prepare('INSERT INTO comments(billet_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+       $affectedLines = $req->execute(array($comment->getBilletId(),$comment->getAuthor(),$comment->getComment()));
+        var_dump ($affectedLines);
         return $affectedLines;
+
+
     }
     public function signalComment($id)
     {
@@ -52,27 +50,13 @@ class CommentManager extends DBManager
         $req->closeCursor(); // on libere la memoire
         return $comments;
     }
-
-
-        /* public function signalComment($comment)
-         {
-             $req =  $this->db->prepare('UPDATE comments SET is_signaled = 1 WHERE id = ?');
-             $result = $req->execute (array($comment->getIsSignaled());
-             return $result;
-         }*/
-
-    /*public function getSignalComment()
+    public function deleteComment($id)
     {
-        $datas =$this->db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y \') AS comment_date FROM comments WHERE is_signaled = 1 ORDER BY comment_date DESC');
-        $comments = array();
-        $datas->setFetchMode(\PDO::FETCH_CLASS,Comment::class);
-        while ($row = $datas->fetch())
-        {
-            $comments[] = $row;
-        }
-        $datas->closeCursor();
-        return $comments;
-    }*/
+            $req = $this->db->prepare("DELETE FROM comments WHERE id = ?");
+            $result = $req->execute(array($id));
+            return $result;
+    }
+
 }     
    
 

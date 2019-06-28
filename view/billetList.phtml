@@ -1,41 +1,28 @@
 <?php $title = 'Article'; ?>
 <?php ob_start (); ?>
-
-
-<body xmlns="http://www.w3.org/1999/html">
-<?php if ($this->is_admin === true)
-    echo ' <a href="index.php?action=adminHome"<small id="btnAdminCreate" class="btn btn-link"> Retour Admin </a></small>';
-?><br>
 <?php
 foreach ($this->billets as $billet) // mettre a jour les views avec $this->billets au lieux de $billets
-{
-    ?>
-
+{ ?>
     <div class="list-group">
-        <a href="index.php?action=billet&id=<?= $billet->getId () ?>" class="list-group-item list-group-item-action">
+        <a href="<?= $this->baseUrl ?>public/index.php?action=billet&id=<?= $billet->getId () ?>"
+           class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"> <?= htmlspecialchars ($billet->getTitle ()) ?></h5>
-                <small><em>le <?= $billet->getBilletDate () ?></em></small>
+                <em><?= $billet->getBilletDate () ?></em>
             </div>
             <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
                 blandit...</p>
             <small class="btn btn-info">Lire le chapitre</small>
         </a>
         <?php if ($this->is_admin === true) { ?>
-            <a href="index.php?action=editBillet&id=<?= $billet->getId () ?>"
-            <small id="btnAdminDelete" class="btn btn-light"> Modifier</a></small>
-            <a href="index.php?action=deleteBillet&id=<?= $billet->getId () ?>"
-            <small id="btnAdminDelete" class="btn btn-light"> Supprimer </a></small>
+            <a href="<?= $this->baseUrl ?>public/index.php?action=editBillet&id=<?= $billet->getId () ?>"
+             id="btnAdminEdit" class="btn btn-light"> Modifier</a>
+            <a href="<?= $this->baseUrl ?>public/index.php?action=deleteBillet&id=<?= $billet->getId () ?>"
+             id="btnAdminDelete" class="btn btn-light"> Supprimer </a>
         <?php } ?>
-    <br>
     </div>
     <?php
 }
 ?>
-
-
-</body>
-
 <?php $content = ob_get_clean (); ?>
-
 <?php require ('template.phtml'); ?>

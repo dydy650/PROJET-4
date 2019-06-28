@@ -20,14 +20,12 @@ class UserManager extends DBManager
             'password'=> $hash)
         );
     }
-
     /**
      * @param $username
      * @return User
      */
     public function getUser($username) // afficher 1 user
     {
-
         $req = $this->db->prepare('SELECT id, username, password, is_admin FROM user WHERE  username = ?');
         $req->execute(array($username));
         $req->setFetchMode(\PDO::FETCH_CLASS,User::class); // Ligne necessaire pour utiliser les entitiés ddans les vues

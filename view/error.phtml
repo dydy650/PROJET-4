@@ -1,0 +1,18 @@
+<?php $title = 'A propos'; ?>
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"/>
+<?php ob_start (); ?>
+
+
+<div id="error" >
+    <i id="attention" class="fas fa-exclamation-triangle"></i>
+    <h2>Erreur</h2>
+</div>
+
+
+<p>
+</p>
+
+
+<?php $content = ob_get_clean (); ?>
+
+<?php require ('template.phtml'); ?>

@@ -1,35 +1,107 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html lang="FR">
 <head>
+    <meta charset="utf-8"/>
+    <title>Nouveau Chapitre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <link href="../public/css/style.css" rel="stylesheet"/>
     <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=t2rxstudxt2hitdkqrnxkv7rglexrindzow037agtyjcdq0j"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({selector: 'textarea'});</script>
 </head>
 
-
-<?php $title = 'Creation Billet'; ?>
-<?php ob_start();
-
-?>
-
-<body></br>
-
-<form action="index.php?action=addBillet" method="post">
+<body>
+<header>
+    <nav id="menu" class="nav justify-content-center">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" role="tab"
+                                    aria-controls="home" aria-selected="true"
+                                    href="<?= $this->baseUrl ?>public/index.php?action=home" title="home">Acceuil</a>
+            </li>
+            <li class="nav-item"><a class="nav-link active" id="chapitre-tab" data-toggle="tab" role="tab"
+                                    aria-controls="home" aria-selected="true"
+                                    href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="billetList">Chapitres</a>
+            </li>
+            <li class="nav-item"><a class="nav-link active" id="about-tab" data-toggle="tab" role="tab"
+                                    aria-controls="home" aria-selected="true"
+                                    href="<?= $this->baseUrl ?>public/index.php?action=aboutUs" title="aboutUS">A
+                    propos</a></li>
+            <?php if ($this->is_admin === true): ?>
+                <li class="nav-item"><a class="nav-link active" id="connexion-tab" data-toggle="tab" role="tab"
+                                        aria-controls="home" aria-selected="true"
+                                        href="<?= $this->baseUrl ?>public/index.php?action=adminHome" title="adminHome">Admin</a>
+                </li>
+            <?php endif; ?>
+            <?php if (empty($_SESSION['username'])): ?>
+                <li class="nav-item"><a class="nav-link active" id="connexion-tab" data-toggle="tab" role="tab"
+                                        aria-controls="home" aria-selected="true"
+                                        href="<?= $this->baseUrl ?>public/index.php?action=loginPage" title="loginPage">Connexion</a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item"><a class="nav-link active" id="deconnexion-tab" data-toggle="tab" role="tab"
+                                        aria-controls="home" aria-selected="true"
+                                        href="<?= $this->baseUrl ?>public/index.php?action=logout" title="lougout">déconnexion</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
     <div>
-        <label for="title">Titre</label><br />
-        <input type="text" id="title" name="title" />
-    </div></br>
-    <div>
-        <label for="content">BILLET</label><br />
-        <textarea id="content" name="content"></textarea>
-    </div></br>
-    <div>
-        <input type="submit" value="Créer" />
+        <img id="image1" src="http://localhost/PHP/P4/public/img/image1.jpg" class="card-img-top" alt="landscape">
+        <h3 id="mainTitle"> UN BILLET POUR L'ALASKA </h3>
+
+        <div id="cercle">
+            <h3 id="surnameAuteur">Jean</h3>
+            <h3 id="nameAuteur">Forteroche</h3>
+            <img alt="feather" id="feather" src="https://img.icons8.com/pastel-glyph/50/000000/feather.png">
+        </div>
+        <div id="separation"></div>
     </div>
+</header>
+<?php if (isset($_SESSION['message'])) { ?>
+    <p class="alert alert-<?= $_SESSION['message']['type'] ?>"><?= $_SESSION['message']['message'] ?></p>
+    <?php unset($_SESSION['message']) ?>
+<?php } ?>
+<article>
+    <form action=<?= $this->baseUrl ?>public/index.php?action=addBillet method="post">
+        <div>
+            <h2>Nouveau chapitre</h2>
+            <label for="title" ></label><br/>
+            <input type="text" id="title" name="title" value="Chapitre X : ..."/>
+        </div>
+        <br>
+        <div>
+            <label for="content"></label><br/>
+            <textarea id="content" name="content"></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="submit" id="createArticle" class="btn btn-info" value="Créer"/><br>
+        </div>
+        <br>
+    </form>
+</article>
 
-</form>
+<footer>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Contacts</h5>
 
+            <p class="card-text">BP 266 Avenue Lafayette 75003 Paris Cedex</p>
+            <p class="card-text"> unbilletpourlalaska@jforteroche.fr</p>
+            <p class="card-text"> Tel : 01 72 65 54 89</p>
+        </div>
+    </div>
+</footer>
+/body>
+</html>
 
-</body>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('template.phtml'); ?>

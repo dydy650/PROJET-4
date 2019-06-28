@@ -1,5 +1,5 @@
 <?php
-namespace App\controller; 
+namespace App\controller;
 
 use \App\model\BilletManager;
 use \App\model\CommentManager;
@@ -8,42 +8,30 @@ use App\model\UserManager;
 
 class BlogController extends AbstractController
 {
-
     public function home()
     {
         $this->render ('../view/home.phtml');
-
     }
-
     public function aboutUs()
     {
         $this->render ('../view/aboutUs.phtml');
-
     }
+    /*public function error($e){
 
-    public function contact()
-    {
-        $this->render ('../view/contact.phtml');
+        $this->addFlash ('danger', $e->getMessage());
 
-    }
-
-    public function contactConfirmation()
-    {
-        $this->render ('../view/contact_confirmation.phtml');
-    }
-
+        $this->render ('../view/error.phtml');
+    }*/
     public function loginPage()
     {
         $this->render ('../view/loginPage.phtml');
     }
-
     public function listBillets()
     {
         $billetManager = new BilletManager();
         $billets = $billetManager->getBillets ();
         $this->render ('../view/billetList.phtml', array("billets" => $billets)); // je veux appeler la articlelist et celle ci aura $billets en parametre
     }
-
     public function billet()
     {
         $billetManager = new BilletManager();
@@ -68,12 +56,12 @@ class BlogController extends AbstractController
             ->setAuthor ($author)
             ->setComment ($content)
             ->setBilletId ($billet_id);
-
-        $affectedLines = $commentManager->postComment ($comment);
-
+        $affectedLines = $commentManager->postComment($comment);
         if ($affectedLines === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire');
+           // echo ('Impossible d\'ajouter le commentaire');
+             $this->addFlash('danger','Impossible d\'ajouter le commentaire');
         } else {
+            $this->addFlash('success','Commentaire ajouté');
             header ('Location: index.php?action=billet&id=' . $billet_id);
         }
     }
@@ -95,7 +83,6 @@ class BlogController extends AbstractController
         //faire un hash md5 du password reçu en POST
         $hash = md5 ($_POST["password"]);
 
-
         //comparer le hash md5 reçu en post à celui de l'entité venant de la base ($user-getPassword())
         if ($hash === $user->getPassword()){
             echo ("connexion reussi");
@@ -104,13 +91,10 @@ class BlogController extends AbstractController
 
             if ($user->getIsAdmin () === "1") {
                 echo ("admin");
-                var_dump($user->getIsAdmin());
-                var_dump ($_SESSION['is_admin']);
                 header ('Location:index.php?action=adminHome');
             } else {
                 echo ("pas admin");
                 $_SESSION['is_admin'] = $user->getIsAdmin();
-                var_dump($user->getIsAdmin());
                header ('Location:index.php?action=home');
             }
         } else {
@@ -126,6 +110,8 @@ class BlogController extends AbstractController
         header ('Location:index.php?action=loginPage');
         exit();
     }
-
-
+    public function error(\Exception $e){
+        $this->addFlash ('warning', $e->getMessage ());
+        $this->render ('../view/error.phtml');
+    }
 }

@@ -1,29 +1,21 @@
 <?php
-
-
 namespace App\controller;
-
 
 use App\model\UserManager;
 use App\model\BilletManager;
-use App\model\DBManager;
 use App\model\Entity\Billet;
-use App\model\Entity\Comment;
 use App\model\Entity\User;
 use \App\model\CommentManager;
-
 
 class AdminController extends AbstractController
 {
     public function adminHome()
     {
         $this->render ('../view/adminHome.phtml');
-
     }
     public function createBillet()
     {
         $this->render ('../view/createBillet.phtml');
-
     }
     /*
      * @param $title
@@ -39,13 +31,11 @@ class AdminController extends AbstractController
             echo "il manque des datas";
             throw new \Exception('error !');
         } else {
-
             $billetManager = new BilletManager();
             $billet = new Billet();
             $billet
                 ->setTitle ($_POST['title'])
                 ->setContent ($_POST['content']);
-
             $id = $billetManager->postBillet ($billet);
             if ($id){
                 $this->addFlash('success','Le chapitre a été créé');
@@ -54,12 +44,6 @@ class AdminController extends AbstractController
             }
             header ('Location: index.php?action=billet&id=' . $id);
         }
-           /* if ($id === false) {
-                throw new \Exception('Impossible d\'ajouter le billet !');
-            } else {
-                header ('Location: index.php?action=billet&id=' . $id);
-            }
-        }*/
 
     }
     public function addUser()
@@ -90,29 +74,38 @@ class AdminController extends AbstractController
         $delete = $billetmanager->deleteBillet($id);
         if ($delete)
         {
-            $this->addFlash('success','le billet a bien été supprimé');
+            $this->addFlash('success','le chapitre a bien été supprimé');
         }else{
-            $this->addFlash('warning','erreur le billet n a pas été supprimé');
+            $this->addFlash('warning','erreur le chapitre n a pas été supprimé');
                   }
+        header ('Location:index.php?action=home');
+    }
+    public function deleteComment($id)
+    {
+        $commentmanager = new CommentManager();
+        $delete = $commentmanager->deleteComment($id);
+        if ($delete)
+        {
+            $this->addFlash('success','le commentaire a bien été supprimé');
+        }else{
+            $this->addFlash('warning','erreur le commentaire n a pas été supprimé');
+        }
         header ('Location:index.php?action=home');
     }
     public function editBillet($id) // je recupère les datas du billet et je redigier vers la page edit pre rempli
    {
        $billetManager = new BilletManager();
        $billet = $billetManager->getBillet($id);
-       var_dump ($billet);
        $this->render ('../view/editBillet.phtml', array("billet" => $billet));
    }
     public function updateBillet($id)
     {
-
         $billetManager = new BilletManager();
         $billet = new billet();
         $billet
             ->setId ($_GET['id'])
             ->setTitle ($_POST['title'])
             ->setContent($_POST['content']);
-        var_dump ($billet);
         $update = $billetManager->updateBillet($billet);
         if ($update){
             $this->addFlash('success','Le chapitre a été modifié');
@@ -121,6 +114,10 @@ class AdminController extends AbstractController
         }
         header ('Location: index.php?action=billet&id=' . $id);
     }
+
+    /**
+     * @param $id
+     */
     public function signalComment($id)
     {
         $commentManager = new CommentManager();
@@ -131,7 +128,7 @@ class AdminController extends AbstractController
         }else{
             $this->addFlash('danger','impossible de signaler le commentaire');
         }
-        header ('Location: index.php?action=billet&id=' . $id);
+        header ('Location: '.$_SERVER['HTTP_REFERER']);
     }
     public function signalCommentList()
     {

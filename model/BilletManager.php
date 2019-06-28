@@ -1,13 +1,11 @@
 <?php
 namespace App\model;
-
 //require_once('DBManager.php'); 
 use App\model\Entity\Billet;
 
 class BilletManager extends DBManager
 {  
     //connexion a la BDD --> fonction de recupération des donnees
-
     public function getBillets() //liste des billets
     {
         
@@ -31,20 +29,24 @@ class BilletManager extends DBManager
         $billet = $req->fetch();
         return $billet;
     }
+
     /**
      * @param Billet $billet
      * @return bool
      */
+
     public function postBillet($billet) // On recoit le billet a enregistrer
     {
         $req = $this->db->prepare('INSERT INTO billets(title, content, billet_date) VALUES(?, ?, NOW())');
         $req->execute(array($billet->getTitle(),$billet->getContent()));
         return $this->db->lastInsertId ();
     }
+
     /**
      * @param int $id
      * @return bool
      */
+
     public function deleteBillet($id) // suppression de la ligne dans la BDD
     {
         $req = $this->db->prepare("DELETE FROM billets WHERE id = ?");
@@ -57,12 +59,14 @@ class BilletManager extends DBManager
      * @param Billet $billet
      * @return bool
      */
+
     public function updateBillet($billet)
     {
         $req =  $this->db->prepare('UPDATE billets SET title = ?, content = ? WHERE id = ?');
         $result = $req->execute(array($billet->getTitle(),$billet->getContent(),$billet->getId()));
         return $result;
     }
+
 
 }
 
