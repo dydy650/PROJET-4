@@ -27,31 +27,31 @@
         <ul class="nav nav-tabs" id="myTab">
             <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" role="tab"
                                     aria-controls="home" aria-selected="true"
-                                    href="<?= $this->baseUrl ?>public/index.php?action=home" title="home">Acceuil</a>
+                                    href="<?= $this->baseUrl ?>index.php?action=home" title="home">Acceuil</a>
             </li>
             <li class="nav-item"><a class="nav-link active" id="chapitre-tab" data-toggle="tab" role="tab"
                                     aria-controls="home" aria-selected="true"
-                                    href="<?= $this->baseUrl ?>public/index.php?action=billetList" title="billetList">Chapitres</a>
+                                    href="<?= $this->baseUrl ?>index.php?action=billetList" title="billetList">Chapitres</a>
             </li>
             <li class="nav-item"><a class="nav-link active" id="about-tab" data-toggle="tab" role="tab"
                                     aria-controls="home" aria-selected="true"
-                                    href="<?= $this->baseUrl ?>public/index.php?action=aboutUs" title="aboutUS">A
+                                    href="<?= $this->baseUrl ?>index.php?action=aboutUs" title="aboutUS">A
                     propos</a></li>
             <?php if ($this->is_admin === true): ?>
                 <li class="nav-item"><a class="nav-link active" id="connexion-tab" data-toggle="tab" role="tab"
                                         aria-controls="home" aria-selected="true"
-                                        href="<?= $this->baseUrl ?>public/index.php?action=adminHome" title="adminHome">Admin</a>
+                                        href="<?= $this->baseUrl ?>index.php?action=adminHome" title="adminHome">Admin</a>
                 </li>
             <?php endif; ?>
             <?php if (empty($_SESSION['username'])): ?>
                 <li class="nav-item"><a class="nav-link active" id="connexion-tab" data-toggle="tab" role="tab"
                                         aria-controls="home" aria-selected="true"
-                                        href="<?= $this->baseUrl ?>public/index.php?action=loginPage" title="loginPage">Connexion</a>
+                                        href="<?= $this->baseUrl ?>index.php?action=loginPage" title="loginPage">Connexion</a>
                 </li>
             <?php else: ?>
                 <li class="nav-item"><a class="nav-link active" id="deconnexion-tab" data-toggle="tab" role="tab"
                                         aria-controls="home" aria-selected="true"
-                                        href="<?= $this->baseUrl ?>public/index.php?action=logout" title="lougout">déconnexion</a>
+                                        href="<?= $this->baseUrl ?>index.php?action=logout" title="lougout">déconnexion</a>
                 </li>
             <?php endif; ?>
         </ul>
@@ -69,13 +69,13 @@
     </div>
 </header>
 
-<p><a href="<?= $this->baseUrl ?>public/index.php?action=billetList">Retour à la liste des billets</a></p>
+<p><a href="<?= $this->baseUrl ?>index.php?action=billetList">Retour à la liste des billets</a></p>
 <?php if (isset($_SESSION['message'])) { ?>
     <p class="alert alert-<?= $_SESSION['message']['type'] ?>"><?= $_SESSION['message']['message'] ?></p>
     <?php unset($_SESSION['message']) ?>
 <?php } ?>
 <article>
-    <form action="<?= $this->baseUrl ?>public/index.php?action=updateBillet&id=<?= $this->billet->getId () ?>"
+    <form action="<?= $this->baseUrl ?>index.php?action=updateBillet&id=<?= $this->billet->getId () ?>"
           method="post">
         <div>
             <h2>Modification du chapitre</h2>

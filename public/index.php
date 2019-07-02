@@ -66,13 +66,10 @@ try {
             throw new Exception('Pas d\'autres pages disponibles pour le moment');
         }
     } else {
-
        $blogController->home ();
     }
 }
 catch (Exception $e) {
     $blogController ->error($e);
-    //$this->addFlash('IMPORTANT :'.$e->getMessage());
-    //echo "IMPORTANT : " .$e->getMessage ();
 }
 

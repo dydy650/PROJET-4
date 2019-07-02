@@ -13,7 +13,7 @@ foreach ($this->billets as $billet) {
         <p>
             <?= nl2br (htmlspecialchars ($billet->getContent ())) ?>
             <br/>
-            <em><a href="<?= $this->baseUrl ?>public/index.php?action=article&id=<?= $billet->getId () ?>">Commentaires</a></em>
+            <em><a href="<?= $this->baseUrl ?>index.php?action=article&id=<?= $billet->getId () ?>">Commentaires</a></em>
         </p>
     </div>
     <?php

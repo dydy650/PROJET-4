@@ -7,7 +7,7 @@
 
 <?php ob_start (); ?>
 
-    <p><a href="<?= $this->baseUrl ?>public/index.php?action=billetList">Retour à la liste des billets</a></p>
+    <p><a href="<?= $this->baseUrl ?>index.php?action=billetList">Retour à la liste des billets</a></p>
 
     <div class="news">
         <h3>
@@ -24,7 +24,7 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title"> Commentaires </h2>
-                <form action="<?= $this->baseUrl ?>public/index.php?action=addComment&amp;id=<?= $this->billet->getId () ?>"
+                <form action="<?= $this->baseUrl ?>index.php?action=addComment&amp;id=<?= $this->billet->getId () ?>"
                       method="post">
                     <div>
                         <p><label for="author">Auteur</label></p>
@@ -56,10 +56,10 @@ foreach ($this->comments as $comment) {
     <p><?= nl2br (htmlspecialchars ($comment->getComment ())) ?></p>
     <?php
     if (!empty($_SESSION['username'])):?>
-        <a href="<?= $this->baseUrl ?>public/index.php?action=signalComment&id=<?= $comment->getId () ?>"
+        <a href="<?= $this->baseUrl ?>index.php?action=signalComment&id=<?= $comment->getId () ?>"
            class="btn btn-outline-warning">Signaler</a>
         <?php if ($this->is_admin === true) { ?>
-            <a href="<?= $this->baseUrl ?>public/index.php?action=deleteComment&id=<?= $comment->getId () ?>"
+            <a href="<?= $this->baseUrl ?>index.php?action=deleteComment&id=<?= $comment->getId () ?>"
                class="btn btn-outline-warning">Supprimer</a>
             <br>
             <br>

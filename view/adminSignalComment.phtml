@@ -16,7 +16,7 @@ foreach ($this->comments as $comment) {
                                 <h5 class="mb-1"> <?= htmlspecialchars ($comment->getAuthor ()) ?></h5>
                                 <em><?= $comment->getComment () ?></em>
                                 <?php if ($this->is_admin === true) { ?>
-                                    <a href="<?= $this->baseUrl ?>public/index.php?action=deleteComment&id=<?= $comment->getId () ?>"
+                                    <a href="<?= $this->baseUrl ?>index.php?action=deleteComment&id=<?= $comment->getId () ?>"
                                      class ="btn btn-outline-warning">Supprimer</a>
                                 <?php } ?>
                             </div>

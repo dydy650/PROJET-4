@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Connectez-vous</h2>
-                    <form action="<?= $this->baseUrl ?>public/index.php?action=login" method="POST">
+                    <form action="<?= $this->baseUrl ?>index.php?action=login" method="POST">
                         <p><label> Identifiant<input type="text" name="username" class="form-control" required/></label>
                         </p>
                         <p><label>Mot de passe <input type="password" name="password" class="form-control"
@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title"> S'inscrire </h2>
-                    <form action="<?= $this->baseUrl ?>public/index.php?action=addUser" method="POST">
+                    <form action="<?= $this->baseUrl ?>index.php?action=addUser" method="POST">
                         <p><label for="username">Identifiant</label>
                             <input id="username" type="text" name="username" class="form-control" required/></p>
                         <p><label>Mot de passe</label>

@@ -4,7 +4,7 @@
 foreach ($this->billets as $billet) // mettre a jour les views avec $this->billets au lieux de $billets
 { ?>
     <div class="list-group">
-        <a href="<?= $this->baseUrl ?>public/index.php?action=billet&id=<?= $billet->getId () ?>"
+        <a href="<?= $this->baseUrl ?>index.php?action=billet&id=<?= $billet->getId () ?>"
            class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"> <?= htmlspecialchars ($billet->getTitle ()) ?></h5>
@@ -15,9 +15,9 @@ foreach ($this->billets as $billet) // mettre a jour les views avec $this->bille
             <small class="btn btn-info">Lire le chapitre</small>
         </a>
         <?php if ($this->is_admin === true) { ?>
-            <a href="<?= $this->baseUrl ?>public/index.php?action=editBillet&id=<?= $billet->getId () ?>"
+            <a href="<?= $this->baseUrl ?>index.php?action=editBillet&id=<?= $billet->getId () ?>"
              id="btnAdminEdit" class="btn btn-light"> Modifier</a>
-            <a href="<?= $this->baseUrl ?>public/index.php?action=deleteBillet&id=<?= $billet->getId () ?>"
+            <a href="<?= $this->baseUrl ?>index.php?action=deleteBillet&id=<?= $billet->getId () ?>"
              id="btnAdminDelete" class="btn btn-light"> Supprimer </a>
         <?php } ?>
     </div>
