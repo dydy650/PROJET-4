@@ -5,7 +5,7 @@ use App\model\UserManager;
 use App\model\BilletManager;
 use App\model\Entity\Billet;
 use App\model\Entity\User;
-use \App\model\CommentManager;
+use App\model\CommentManager;
 
 class AdminController extends AbstractController
 {

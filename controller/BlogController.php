@@ -85,15 +85,15 @@ class BlogController extends AbstractController
 
         //comparer le hash md5 reçu en post à celui de l'entité venant de la base ($user-getPassword())
         if ($hash === $user->getPassword()){
-            echo ("connexion reussi");
+            //echo ("connexion reussi");
             $_SESSION['username'] = $user->getUsername();
             $_SESSION['is_admin'] = $user->getIsAdmin();
 
             if ($user->getIsAdmin () === "1") {
-                echo ("admin");
+               // echo ("admin");
                 header ('Location:index.php?action=adminHome');
             } else {
-                echo ("pas admin");
+                //echo ("pas admin");
                 $_SESSION['is_admin'] = $user->getIsAdmin();
                header ('Location:index.php?action=home');
             }
