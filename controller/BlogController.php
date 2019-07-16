@@ -58,7 +58,6 @@ class BlogController extends AbstractController
             ->setBilletId ($billet_id);
         $affectedLines = $commentManager->postComment($comment);
         if ($affectedLines === false) {
-           // echo ('Impossible d\'ajouter le commentaire');
              $this->addFlash('danger','Impossible d\'ajouter le commentaire');
         } else {
             $this->addFlash('success','Commentaire ajouté');
@@ -85,20 +84,18 @@ class BlogController extends AbstractController
 
         //comparer le hash md5 reçu en post à celui de l'entité venant de la base ($user-getPassword())
         if ($hash === $user->getPassword()){
-            //echo ("connexion reussi");
             $_SESSION['username'] = $user->getUsername();
             $_SESSION['is_admin'] = $user->getIsAdmin();
 
             if ($user->getIsAdmin () === "1") {
-               // echo ("admin");
                 header ('Location:index.php?action=adminHome');
             } else {
-                //echo ("pas admin");
                 $_SESSION['is_admin'] = $user->getIsAdmin();
                header ('Location:index.php?action=home');
             }
         } else {
-            echo ("Username ou mot de passe incorrection");
+            //echo ("Username ou mot de passe incorrection");
+            throw new \Exception('Username ou mot de passe incorrection');
         }
         //Si c'est le même, on stocke en session le username et le is_admin : on est connecté!
     }

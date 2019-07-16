@@ -7,7 +7,7 @@ abstract class DBManager
     
     public function __construct()
     {
-        // Analyse sans sections
+        //Congiguration de config.ini pour le pas a
         $config = parse_ini_file("../config.ini");
         $host=$config['host'];
         $dbname=$config['dbname'];

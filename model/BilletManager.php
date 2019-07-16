@@ -25,7 +25,7 @@ class BilletManager extends DBManager
     {
         $req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(billet_date, \'%d/%m/%Y \') AS billet_date FROM billets WHERE id = ?');
         $req->execute(array($id));
-        $req->setFetchMode(\PDO::FETCH_CLASS,Billet::class); // Ligne necessaire pour utiliser les entitiés ddans les vues
+        $req->setFetchMode(\PDO::FETCH_CLASS,Billet::class); // Ligne necessaire pour utiliser les entitiés dans les vues
         $billet = $req->fetch();
         return $billet;
     }

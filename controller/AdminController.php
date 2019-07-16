@@ -28,8 +28,7 @@ class AdminController extends AbstractController
         //On hydrate le billet avec les données $_POST, puisqu\'on sait qu\'elles sont présentes
         //On envoie le billet hydraté au model
         if (empty($_POST['title']) || empty($_POST['content'])) {
-            echo "il manque des datas";
-            throw new \Exception('error !');
+            throw new \Exception('error : il manque des datas !');
         } else {
             $billetManager = new BilletManager();
             $billet = new Billet();
@@ -49,8 +48,7 @@ class AdminController extends AbstractController
     public function addUser()
     {
         if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
-            echo 'error';
-            //throw new \Exception('error !');
+            throw new \Exception('error !');
         } else {
                  if ($_POST['password'] === $_POST['password2']) {
                 $userManager = new UserManager();
