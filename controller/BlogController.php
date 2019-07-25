@@ -4,6 +4,7 @@ namespace App\controller;
 use \App\model\BilletManager;
 use \App\model\CommentManager;
 use App\model\Entity\Comment;
+use App\model\Entity\User;
 use App\model\UserManager;
 
 class BlogController extends AbstractController
@@ -70,23 +71,16 @@ class BlogController extends AbstractController
      */
     public function login()
     {
-        //on verifie si on a qqch en post
         if (empty($_POST["username"]) || empty($_POST["password"]))
         {
             throw new \Exception('error !');
         }
-        //on va recupérer l objet User de la base
         $userManager = new UserManager();
         $user = $userManager->getUser ($_POST["username"]);
-        //récupérer cette entité $user venant de la base (qui contient donc les vrais datas, on s'intéresse surtout au password ;) )
-        //faire un hash md5 du password reçu en POST
         $hash = md5 ($_POST["password"]);
-
-        //comparer le hash md5 reçu en post à celui de l'entité venant de la base ($user-getPassword())
-        if ($hash === $user->getPassword()){
+        if ($user instanceof User && $hash === $user->getPassword()){
             $_SESSION['username'] = $user->getUsername();
             $_SESSION['is_admin'] = $user->getIsAdmin();
-
             if ($user->getIsAdmin () === "1") {
                 header ('Location:index.php?action=adminHome');
             } else {
@@ -94,10 +88,8 @@ class BlogController extends AbstractController
                header ('Location:index.php?action=home');
             }
         } else {
-            //echo ("Username ou mot de passe incorrection");
             throw new \Exception('Username ou mot de passe incorrection');
         }
-        //Si c'est le même, on stocke en session le username et le is_admin : on est connecté!
     }
 
     public function logout()

@@ -6,6 +6,8 @@ use App\model\BilletManager;
 use App\model\Entity\Billet;
 use App\model\Entity\User;
 use App\model\CommentManager;
+use Exception;
+
 
 class AdminController extends AbstractController
 {
@@ -135,5 +137,9 @@ class AdminController extends AbstractController
         $this->render('../view/adminSignalComment.phtml', array("comments" => $comments));
     }
 }
+
+
+
+
 
 

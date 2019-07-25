@@ -22,7 +22,11 @@ try {
         } elseif ($_GET['action'] == 'aboutUs') {
             $blogController->aboutUs ();
         } elseif ($_GET['action'] == 'createBillet') {
-            $adminController->createBillet ();
+            if ($_SESSION['is_admin'] === "1") {
+                $adminController->createBillet ();
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'loginPage') {
             $blogController->loginPage ();
         } elseif ($_GET['action'] == 'addComment') {
@@ -36,32 +40,60 @@ try {
                 throw new Exception('Aucun billet envoyé');
             }
         } elseif ($_GET['action'] == 'addBillet') {
-            $adminController->addBillet ();
+            if ($_SESSION['is_admin'] === "1") {
+                $adminController->addBillet ();
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'addUser') {
-            $adminController->addUser ();
+                $adminController->addUser ();
         } elseif ($_GET['action'] == 'login') {
             $blogController->login ();
-        } elseif ($_GET['action'] == 'adminHome') {
-            $adminController->adminHome ();
+        } elseif ($_GET['action'] == 'adminHome'){
+            if ($_SESSION['is_admin'] === "1") {
+                $adminController->adminHome ();
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'logout') {
             $blogController->logout ();
         } elseif ($_GET['action'] == 'deleteBillet' AND isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $adminController->deleteBillet ($id);
+            if ($_SESSION['is_admin'] === "1") {
+                $id = $_GET['id'];
+                $adminController->deleteBillet ($id);
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'deleteComment' AND isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $adminController->deleteComment ($id);
+            if ($_SESSION['is_admin'] === "1") {
+                $id = $_GET['id'];
+                $adminController->deleteComment ($id);
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'editBillet' AND isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $adminController->editBillet ($id);
+            if ($_SESSION['is_admin'] === "1") {
+                $id = $_GET['id'];
+                $adminController->editBillet ($id);
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'updateBillet' AND isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $adminController->updateBillet ($id);
+            if ($_SESSION['is_admin'] === "1") {
+                $id = $_GET['id'];
+                $adminController->updateBillet ($id);
+            } else {
+                throw new Exception('Accès refusé');
+            }
         } elseif ($_GET['action'] == 'signalComment' AND isset($_GET['id'])) {
             $id = $_GET['id'];
             $adminController->signalComment ($id);
         } elseif ($_GET['action'] == 'signalCommentList') {
-            $adminController->signalCommentList ();
+            if ($_SESSION['is_admin'] === "1") {
+                $adminController->signalCommentList ();
+            } else {
+                throw new Exception('Accès refusé');
+            }
         }else{
             throw new Exception('Pas d\'autres pages disponibles pour le moment');
         }
